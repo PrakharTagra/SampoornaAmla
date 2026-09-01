@@ -16,7 +16,7 @@ const NAV_LINKS = [
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { itemCount } = useCart();
+  const { itemCount, openDrawer } = useCart();
 
   const navLinkClass = ({ isActive }) =>
     `text-sm transition-colors duration-200 ${
@@ -45,7 +45,7 @@ export default function Header() {
           <IconButton label="Search" className="hidden sm:inline-flex">
             <Search size={18} strokeWidth={1.75} />
           </IconButton>
-          <IconButton as={NavLink} to="/cart" label="Cart" className="relative">
+          <IconButton onClick={openDrawer} label={`Cart, ${itemCount} item${itemCount === 1 ? "" : "s"}`} className="relative">
             <ShoppingBag size={18} strokeWidth={1.75} />
             {itemCount > 0 ? (
               <span className="absolute -top-0.5 -right-0.5 h-4 w-4 rounded-full bg-forest text-ivory text-[10px] flex items-center justify-center">

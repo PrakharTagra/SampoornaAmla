@@ -1,9 +1,15 @@
 import { Leaf } from "lucide-react";
 import { useState } from "react";
 
-export default function ProductImage({ src, alt = "", className = "", ratio = "square" }) {
+const RATIOS = {
+  square: "aspect-square",
+  portrait: "aspect-[4/5]",
+  wide: "aspect-[4/3]",
+};
+
+export default function ProductImage({ src, alt = "", className = "", ratio = "square", zoom = false }) {
   const [errored, setErrored] = useState(false);
-  const ratioClass = ratio === "square" ? "aspect-square" : "aspect-[4/5]";
+  const ratioClass = RATIOS[ratio] || RATIOS.square;
 
   if (!src || errored) {
     return (
@@ -19,8 +25,11 @@ export default function ProductImage({ src, alt = "", className = "", ratio = "s
         src={src}
         alt={alt}
         onError={() => setErrored(true)}
-        className="h-full w-full object-cover"
+        className={`h-full w-full object-cover transition-transform duration-500 motion-reduce:transition-none ${
+          zoom ? "group-hover:scale-105" : ""
+        }`}
         loading="lazy"
+        decoding="async"
       />
     </div>
   );
