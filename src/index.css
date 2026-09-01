@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ivory text-brown font-sans antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif text-brown;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.forest.DEFAULT');
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply w-full max-w-container mx-auto px-5 sm:px-8 lg:px-10;
+  }
+}
