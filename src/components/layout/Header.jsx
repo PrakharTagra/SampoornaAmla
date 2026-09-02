@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Search, ShoppingBag, Menu } from "lucide-react";
 import Container from "../primitives/Container";
 import IconButton from "../primitives/IconButton";
+import Logo from "../primitives/Logo";
 import { useCart } from "../../context/CartContext";
 import { scrollToSection } from "../../lib/scrollToSection";
 import MobileMenu from "./MobileMenu";
@@ -11,7 +12,6 @@ const NAV_LINKS = [
   { to: "/", label: "Home", end: true },
   { to: "/products", label: "Products" },
   { to: "/#story", label: "Our Story", scrollTarget: "story" },
-  { to: "/about", label: "About Pratapgarh" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -30,11 +30,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 bg-ivory/95 backdrop-blur border-b border-brown/10">
       <Container className="flex items-center justify-between h-16 sm:h-20">
-        <NavLink to="/" className="flex flex-col leading-none">
-          <span className="font-serif text-xl sm:text-2xl text-brown">Pratapgarh Amla</span>
-          <span className="hidden sm:block text-[10px] tracking-[0.12em] text-amla-200 mt-0.5">
-            Purity, Heritage, Wellness
-          </span>
+        <NavLink to="/" aria-label="Pratapgarh Amla — home">
+          <Logo />
         </NavLink>
 
         <nav className="hidden lg:flex items-center gap-8">

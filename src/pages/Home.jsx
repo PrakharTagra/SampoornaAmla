@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Container from "../components/primitives/Container";
 import SectionHeading from "../components/primitives/SectionHeading";
+import BackgroundImage from "../components/primitives/BackgroundImage";
 import Hero from "../components/layout/Hero";
 import TrustStrip from "../components/layout/TrustStrip";
 import StoryHero from "../components/story/StoryHero";
@@ -44,6 +45,7 @@ export default function Home() {
         <StorySection
           eyebrow="Our origin"
           title="Rooted in Pratapgarh"
+          image="/images/story/3.jpg"
           imageAlt="Aonla orchards near Pratapgarh"
         >
           <p>
@@ -57,8 +59,9 @@ export default function Home() {
           </p>
         </StorySection>
 
-        <section className="py-16 sm:py-20 bg-ivory-50">
-          <Container className="flex flex-col gap-12">
+        <section className="relative overflow-hidden py-16 sm:py-20">
+          <BackgroundImage src="/images/story/4.jpg" alt="" overlay="light" />
+          <Container className="relative z-10 flex flex-col gap-12">
             <SectionHeading
               align="center"
               eyebrow="Sourcing journey"

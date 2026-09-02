@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import Container from "../primitives/Container";
 import Divider from "../primitives/Divider";
+import Logo from "../primitives/Logo";
 import { scrollToSection } from "../../lib/scrollToSection";
 
 const COLUMNS = [
@@ -16,7 +17,6 @@ const COLUMNS = [
     title: "Company",
     links: [
       { to: "/#story", label: "Our Story", scrollTarget: "story" },
-      { to: "/about", label: "About Pratapgarh" },
       { to: "/contact", label: "Contact" },
     ],
   },
@@ -36,7 +36,7 @@ export default function Footer() {
     <footer className="bg-forest text-ivory mt-8">
       <Container className="py-14 grid grid-cols-2 sm:grid-cols-4 gap-10">
         <div className="col-span-2 sm:col-span-1">
-          <span className="font-serif text-xl">Pratapgarh Amla</span>
+          <Logo variant="light" />
           <p className="text-sm text-ivory/70 mt-3 leading-relaxed max-w-xs">
             Pure Amla from the city of Aonla, brought to every home in India.
           </p>

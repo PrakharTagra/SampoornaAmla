@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Leaf, MapPin, Truck } from "lucide-react";
 import Container from "../primitives/Container";
 import Button from "../primitives/Button";
-import ProductImage from "../primitives/ProductImage";
+import BackgroundImage from "../primitives/BackgroundImage";
 
 const ATTRIBUTES = [
   { icon: Leaf, label: "100% Natural" },
@@ -10,29 +10,32 @@ const ATTRIBUTES = [
   { icon: Truck, label: "Pan-India Delivery" },
 ];
 
-const SLIDES = Array.from({ length: 5 }, (_, i) => ({
-  id: i+1,
-  eyebrow: "From the land of Pratapgarh",
-  title: "Comes nature\u2019s gift",
-  description: "Pure Amla from the city of Aonla, brought to every home in India.",
-  image: null,
-  imageAlt: "Pratapgarh Amla — fresh Amla fruit",
-},
-{
-  id: i+2,
-  eyebrow: "Pratapgarh ke amla",
-  title: "Comes nature\u2019s gift",
-  description: "Pure Amla from the city of Aonla, brought to every home in India.",
-  image: null,
-  imageAlt: "Pratapgarh Amla — fresh Amla fruit",
-}
-));
+// Drop each banner background into /public/images/hero/ using these
+// filenames and it will show up automatically. Until then a themed
+// fallback gradient is shown so the banner never looks broken.
+const SLIDES = [
+  {
+    id: 1,
+    eyebrow: "From the land of Pratapgarh",
+    title: "Comes nature\u2019s gift",
+    description: "Pure Amla from the city of Aonla, brought to every home in India.",
+    image: "/images/hero/1.png",
+    imageAlt: "Pratapgarh Amla — fresh Amla fruit orchards",
+  },
+  {
+    id: 2,
+    eyebrow: "Pratapgarh ke amla",
+    title: "Comes nature\u2019s gift",
+    description: "Pure Amla from the city of Aonla, brought to every home in India.",
+    image: "/images/hero/2.png",
+    imageAlt: "Pratapgarh Amla — harvest",
+  },
+];
 
 const SLIDE_DURATION = 5000;
 
 export default function Hero() {
   const [active, setActive] = useState(0);
-  const timeoutRef = useRef(null);
 
   const scrollToCollection = () => {
     document.getElementById("collection")?.scrollIntoView({ behavior: "smooth" });
@@ -40,39 +43,41 @@ export default function Hero() {
 
   useEffect(() => {
     if (SLIDES.length <= 1) return undefined;
-    timeoutRef.current = setTimeout(() => {
+    const intervalId = setInterval(() => {
       setActive((current) => (current + 1) % SLIDES.length);
     }, SLIDE_DURATION);
-    return () => clearTimeout(timeoutRef.current);
-  }, [active]);
+    return () => clearInterval(intervalId);
+  }, []);
 
   const slide = SLIDES[active];
 
   return (
     <section
-      className="relative overflow-hidden bg-ivory flex-1 flex items-center"
+      className="relative overflow-hidden flex-1 flex items-center min-h-[26rem] sm:min-h-[30rem]"
       aria-roledescription="carousel"
       aria-label="Homepage banner"
     >
-      <Container className="relative grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center py-6 sm:py-10 lg:py-16 w-full">
+      <BackgroundImage key={slide.id} src={slide.image} alt={slide.imageAlt} overlay="left-fade" />
+
+      <Container className="relative z-10 py-10 sm:py-16 lg:py-20 w-full">
         <div
           key={slide.id}
-          className="flex flex-col gap-3 sm:gap-5 lg:gap-6 order-2 lg:order-1 animate-[fade-in_0.5s_ease]"
+          className="flex flex-col gap-3 sm:gap-5 lg:gap-6 max-w-lg animate-[fade-in_0.5s_ease]"
         >
-          <span className="font-sans text-xs tracking-[0.14em] text-amla-200">
+          <span className="font-sans text-xs tracking-[0.14em] text-gold-50">
             {slide.eyebrow}
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-[3.4rem] leading-[1.08] text-brown">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-[3.4rem] leading-[1.08] text-ivory">
             {slide.title}
           </h1>
-          <p className="font-sans text-sm sm:text-base lg:text-lg text-brown/70 max-w-md leading-relaxed">
+          <p className="font-sans text-sm sm:text-base lg:text-lg text-ivory/80 max-w-md leading-relaxed">
             {slide.description}
           </p>
 
           <div className="flex flex-col xs:flex-row flex-wrap gap-x-6 gap-y-2 pt-1">
             {ATTRIBUTES.map((attr) => (
-              <div key={attr.label} className="flex items-center gap-2 text-sm text-brown/75">
-                <attr.icon size={16} className="text-amla-200" strokeWidth={1.75} />
+              <div key={attr.label} className="flex items-center gap-2 text-sm text-ivory/85">
+                <attr.icon size={16} className="text-gold-50" strokeWidth={1.75} />
                 {attr.label}
               </div>
             ))}
@@ -83,14 +88,22 @@ export default function Hero() {
           </Button>
         </div>
 
-        <div className="relative order-1 lg:order-2 w-full max-w-[180px] xs:max-w-[220px] sm:max-w-[260px] lg:max-w-[320px] xl:max-w-[380px] mx-auto">
-          <ProductImage
-            key={slide.id}
-            src={slide.image}
-            alt={slide.imageAlt}
-            className="relative rounded-lg shadow-soft animate-[fade-in_0.5s_ease]"
-          />
-        </div>
+        {SLIDES.length > 1 ? (
+          <div className="flex items-center gap-2 mt-10 lg:mt-16">
+            {SLIDES.map((s, i) => (
+              <button
+                key={s.id}
+                type="button"
+                aria-label={`Show banner ${i + 1}`}
+                aria-current={i === active}
+                onClick={() => setActive(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === active ? "w-8 bg-gold-50" : "w-4 bg-ivory/40 hover:bg-ivory/60"
+                }`}
+              />
+            ))}
+          </div>
+        ) : null}
       </Container>
     </section>
   );
