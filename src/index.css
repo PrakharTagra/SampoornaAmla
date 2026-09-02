@@ -21,11 +21,6 @@
     outline: 2px solid theme('colors.forest.DEFAULT');
     outline-offset: 2px;
   }
-
-  /* The default forest-green focus ring has poor contrast on the several
-     dark forest-background sections (Footer, BrandBanner, ProductDetail's
-     origin banner, forest-variant Buttons/Badges). Swap to gold there so
-     keyboard focus stays visible regardless of the surrounding surface. */
   .bg-forest :focus-visible,
   .bg-forest:focus-visible {
     outline-color: theme('colors.gold.DEFAULT');

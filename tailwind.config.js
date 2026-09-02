@@ -55,6 +55,12 @@ export default {
         soft: "0 2px 12px rgba(51, 44, 36, 0.08)",
         card: "0 1px 3px rgba(51, 44, 36, 0.1)",
       },
+      keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
       screens: {
         xs: "420px",
       },

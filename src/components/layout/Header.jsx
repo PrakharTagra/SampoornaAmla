@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { Search, ShoppingBag, Menu } from "lucide-react";
 import Container from "../primitives/Container";
 import IconButton from "../primitives/IconButton";
 import { useCart } from "../../context/CartContext";
+import { scrollToSection } from "../../lib/scrollToSection";
 import MobileMenu from "./MobileMenu";
 
 const NAV_LINKS = [
   { to: "/", label: "Home", end: true },
   { to: "/products", label: "Products" },
-  { to: "/story", label: "Our Story" },
+  { to: "/#story", label: "Our Story", scrollTarget: "story" },
   { to: "/about", label: "About Pratapgarh" },
   { to: "/contact", label: "Contact" },
 ];
@@ -17,11 +18,14 @@ const NAV_LINKS = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { itemCount, openDrawer } = useCart();
+  const location = useLocation();
 
   const navLinkClass = ({ isActive }) =>
     `text-sm transition-colors duration-200 ${
       isActive ? "text-forest font-medium" : "text-brown/70 hover:text-brown"
     }`;
+
+  const scrollLinkClass = "text-sm transition-colors duration-200 text-brown/70 hover:text-brown";
 
   return (
     <header className="sticky top-0 z-40 bg-ivory/95 backdrop-blur border-b border-brown/10">
@@ -34,11 +38,30 @@ export default function Header() {
         </NavLink>
 
         <nav className="hidden lg:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <NavLink key={link.to} to={link.to} end={link.end} className={navLinkClass}>
-              {link.label}
-            </NavLink>
-          ))}
+          {NAV_LINKS.map((link) =>
+            link.scrollTarget ? (
+              // Section link, not a route: on the homepage this scrolls in
+              // place; from anywhere else it navigates to "/#..." and Home's
+              // own hash effect scrolls once the section has mounted.
+              <Link
+                key={link.to}
+                to={link.to}
+                className={scrollLinkClass}
+                onClick={(e) => {
+                  if (location.pathname === "/") {
+                    e.preventDefault();
+                    scrollToSection(link.scrollTarget);
+                  }
+                }}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <NavLink key={link.to} to={link.to} end={link.end} className={navLinkClass}>
+                {link.label}
+              </NavLink>
+            )
+          )}
         </nav>
 
         <div className="flex items-center gap-1">

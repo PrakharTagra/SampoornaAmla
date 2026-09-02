@@ -1,7 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { X } from "lucide-react";
+import { scrollToSection } from "../../lib/scrollToSection";
 
 export default function MobileMenu({ open, onClose, links }) {
+  const location = useLocation();
+
   if (!open) return null;
 
   return (
@@ -16,21 +19,38 @@ export default function MobileMenu({ open, onClose, links }) {
           <X size={18} />
         </button>
         <nav className="flex flex-col gap-1 mt-6">
-          {links.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.end}
-              onClick={onClose}
-              className={({ isActive }) =>
-                `py-3 border-b border-brown/10 text-base ${
-                  isActive ? "text-forest font-medium" : "text-brown/80"
-                }`
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
+          {links.map((link) =>
+            link.scrollTarget ? (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={(e) => {
+                  if (location.pathname === "/") {
+                    e.preventDefault();
+                    scrollToSection(link.scrollTarget);
+                  }
+                  onClose();
+                }}
+                className="py-3 border-b border-brown/10 text-base text-brown/80"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                end={link.end}
+                onClick={onClose}
+                className={({ isActive }) =>
+                  `py-3 border-b border-brown/10 text-base ${
+                    isActive ? "text-forest font-medium" : "text-brown/80"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            )
+          )}
         </nav>
       </div>
     </div>

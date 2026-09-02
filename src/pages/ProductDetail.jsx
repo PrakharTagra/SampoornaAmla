@@ -15,7 +15,6 @@ import VariantSelector from "../components/product/VariantSelector";
 import ProductTabs from "../components/product/ProductTabs";
 import ProductGrid from "../components/product/ProductGrid";
 import ProductQuickView from "../components/product/ProductQuickView";
-import HeritageMotif from "../components/layout/HeritageMotif";
 import { getProductBySlug, getRelatedProducts, CATEGORY_LABELS } from "../data/products";
 import { useCart } from "../context/CartContext";
 import NotFound from "./NotFound";
@@ -159,10 +158,6 @@ function ProductDetailContent({ product }) {
       </section>
 
       <section className="py-16 sm:py-20 bg-forest text-ivory relative overflow-hidden">
-        <HeritageMotif
-          tone="ivory"
-          className="absolute -bottom-2 left-0 w-full h-24 opacity-10 pointer-events-none"
-        />
         <Container className="relative flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-10">
           <div className="flex flex-col gap-3 max-w-xl">
             <span className="font-sans text-xs tracking-[0.14em] text-gold-50">Origin</span>
@@ -174,7 +169,7 @@ function ProductDetailContent({ product }) {
               harvested, processed and quality-checked before it is packed and sent across India.
             </p>
           </div>
-          <Button as={Link} to="/story" variant="gold" size="md" className="shrink-0 sm:ml-auto">
+          <Button as={Link} to="/#story" variant="gold" size="md" className="shrink-0 sm:ml-auto">
             Discover Our Story
           </Button>
         </Container>

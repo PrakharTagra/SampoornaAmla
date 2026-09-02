@@ -4,7 +4,6 @@ import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
-import Story from "./pages/Story";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import About from "./pages/About";
@@ -20,7 +19,6 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path="products" element={<Products />} />
             <Route path="products/:slug" element={<ProductDetail />} />
-            <Route path="story" element={<Story />} />
             <Route path="cart" element={<Cart />} />
             <Route path="checkout" element={<Checkout />} />
             <Route path="about" element={<About />} />

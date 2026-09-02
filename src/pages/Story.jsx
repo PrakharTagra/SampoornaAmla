@@ -18,11 +18,6 @@ export default function Story() {
 
       <StoryHero />
 
-      {/* Origin story: Section 3's brand philosophy in narrative form. Kept
-          to general, verifiable-shaped statements about the region and the
-          sourcing relationship — no invented dates, certifications or
-          statistics, per Section 3 / Section 17's "do not invent historical
-          facts" rule. Real client-supplied copy should replace this. */}
       <StorySection
         eyebrow="Our origin"
         title="Rooted in Pratapgarh"

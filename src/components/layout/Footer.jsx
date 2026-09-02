@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Container from "../primitives/Container";
 import Divider from "../primitives/Divider";
+import { scrollToSection } from "../../lib/scrollToSection";
 
 const COLUMNS = [
   {
@@ -14,7 +15,7 @@ const COLUMNS = [
   {
     title: "Company",
     links: [
-      { to: "/story", label: "Our Story" },
+      { to: "/#story", label: "Our Story", scrollTarget: "story" },
       { to: "/about", label: "About Pratapgarh" },
       { to: "/contact", label: "Contact" },
     ],
@@ -29,8 +30,10 @@ const COLUMNS = [
 ];
 
 export default function Footer() {
+  const location = useLocation();
+
   return (
-    <footer className="bg-forest text-ivory mt-24">
+    <footer className="bg-forest text-ivory mt-8">
       <Container className="py-14 grid grid-cols-2 sm:grid-cols-4 gap-10">
         <div className="col-span-2 sm:col-span-1">
           <span className="font-serif text-xl">Pratapgarh Amla</span>
@@ -42,7 +45,17 @@ export default function Footer() {
           <div key={col.title} className="flex flex-col gap-3">
             <span className="text-sm font-medium text-gold-50">{col.title}</span>
             {col.links.map((link) => (
-              <Link key={link.to} to={link.to} className="text-sm text-ivory/70 hover:text-ivory transition-colors duration-200">
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={(e) => {
+                  if (link.scrollTarget && location.pathname === "/") {
+                    e.preventDefault();
+                    scrollToSection(link.scrollTarget);
+                  }
+                }}
+                className="text-sm text-ivory/70 hover:text-ivory transition-colors duration-200"
+              >
                 {link.label}
               </Link>
             ))}

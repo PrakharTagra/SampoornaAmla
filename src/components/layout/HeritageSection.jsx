@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import Container from "../primitives/Container";
 import Button from "../primitives/Button";
 import ProductImage from "../primitives/ProductImage";
-import HeritageMotif from "./HeritageMotif";
 
 export default function HeritageSection() {
   return (
@@ -10,7 +9,6 @@ export default function HeritageSection() {
       <Container className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div className="relative">
           <ProductImage src={null} alt="Aonla orchards near Pratapgarh" ratio="wide" className="rounded-lg" />
-          <HeritageMotif className="absolute -top-6 -left-6 w-40 h-auto text-gold/25 opacity-70 pointer-events-none hidden sm:block" />
         </div>
 
         <div className="flex flex-col gap-5">

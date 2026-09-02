@@ -8,18 +8,26 @@ export default function Modal({ open, onClose, children, labelledBy, variant = "
   const [visible, setVisible] = useState(false);
   const isDrawer = variant === "drawer";
 
-  // Mount immediately when opened, then flip `visible` on the next frame so
-  // the transition classes actually animate in. On close, reverse the order
-  // and unmount only after the exit transition finishes.
+  // Mount immediately when opened, then flip `visible` on the frame *after*
+  // next so the browser has actually painted the off-screen starting
+  // position before we animate to the open one — a single rAF can fire
+  // before that paint happens, which makes the drawer "snap" open instead
+  // of sliding in.
   useEffect(() => {
     if (open) {
       setMounted(true);
-      const raf = requestAnimationFrame(() => setVisible(true));
-      return () => cancelAnimationFrame(raf);
+      let raf2;
+      const raf1 = requestAnimationFrame(() => {
+        raf2 = requestAnimationFrame(() => setVisible(true));
+      });
+      return () => {
+        cancelAnimationFrame(raf1);
+        if (raf2) cancelAnimationFrame(raf2);
+      };
     }
 
     setVisible(false);
-    const timeout = setTimeout(() => setMounted(false), 200);
+    const timeout = setTimeout(() => setMounted(false), 300);
     return () => clearTimeout(timeout);
   }, [open]);
 
@@ -68,7 +76,7 @@ export default function Modal({ open, onClose, children, labelledBy, variant = "
     >
       <button
         aria-label="Close dialog"
-        className={`absolute inset-0 bg-brown/60 backdrop-blur-[1px] transition-opacity duration-200 motion-reduce:transition-none ${
+        className={`absolute inset-0 bg-brown/60 backdrop-blur-[1px] transition-opacity duration-300 motion-reduce:transition-none ${
           visible ? "opacity-100" : "opacity-0"
         }`}
         onClick={onClose}
@@ -80,7 +88,7 @@ export default function Modal({ open, onClose, children, labelledBy, variant = "
         aria-labelledby={labelledBy}
         className={
           isDrawer
-            ? `relative bg-ivory w-full max-w-md h-full overflow-y-auto shadow-soft transition-transform duration-200 motion-reduce:transition-none ${
+            ? `relative bg-ivory w-full max-w-md h-full overflow-y-auto shadow-soft transition-transform duration-300 ease-out motion-reduce:transition-none ${
                 visible ? "translate-x-0" : "translate-x-full"
               }`
             : `relative bg-ivory w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-md shadow-soft transition-all duration-200 motion-reduce:transition-none ${

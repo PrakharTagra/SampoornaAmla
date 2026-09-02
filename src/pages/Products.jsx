@@ -10,9 +10,6 @@ export default function Products() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [quickViewProduct, setQuickViewProduct] = useState(null);
 
-  // Filter categories are derived from whatever categories actually exist in
-  // the product data, so a future product with a new category value shows up
-  // in the nav automatically rather than requiring a component change.
   const categories = useMemo(() => {
     const present = [...new Set(products.map((p) => p.category))];
     return [
@@ -35,7 +32,6 @@ export default function Products() {
           <SectionHeading
             eyebrow="Shop"
             title="Our Amla Collection"
-            description="Naturally grown in the orchards of Pratapgarh, carefully processed and packed for freshness."
           />
 
           <nav aria-label="Filter by category" className="flex flex-wrap gap-2 border-b border-brown/10 pb-6">
