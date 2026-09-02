@@ -3,10 +3,6 @@ import { CheckCircle2 } from "lucide-react";
 import Button from "../primitives/Button";
 import { formatINR } from "../primitives/Price";
 
-// Phase 6: this is a MOCK confirmation. No order is transmitted or stored
-// anywhere — `orderId` is generated client-side and the cart is cleared
-// locally. There is no order-lookup/tracking system behind this screen
-// (flagged again in this phase's Known Issues).
 export default function OrderConfirmation({ orderId, email, total }) {
   return (
     <div className="flex flex-col items-center gap-5 text-center py-16 max-w-lg mx-auto">

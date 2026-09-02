@@ -1,11 +1,6 @@
 import Container from "../primitives/Container";
 import ProductImage from "../primitives/ProductImage";
 
-// A generic "editorial content block" — eyebrow/title/paragraphs beside an
-// image, with the image side switchable. Reused for the origin-story block
-// inside the homepage's "Our Story" section so it doesn't duplicate that
-// JSX, and so any future editorial block can reuse it too rather than
-// hand-rolling another two-column section.
 export default function StorySection({ eyebrow, title, children, imageAlt, imageSide = "right", className = "" }) {
   const imageFirst = imageSide === "left";
 

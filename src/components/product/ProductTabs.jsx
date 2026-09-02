@@ -1,10 +1,5 @@
 import { useState } from "react";
 
-// Renders product.benefits / howToUse / ingredients / storage as accessible
-// tabs. Falls back gracefully if a product is missing one of the fields
-// (per the product data contract, only `variants` is guaranteed to exist
-// with real content for every product) rather than assuming all four are
-// always present.
 export default function ProductTabs({ product }) {
   const tabs = [
     {

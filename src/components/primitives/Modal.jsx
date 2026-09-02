@@ -8,11 +8,6 @@ export default function Modal({ open, onClose, children, labelledBy, variant = "
   const [visible, setVisible] = useState(false);
   const isDrawer = variant === "drawer";
 
-  // Mount immediately when opened, then flip `visible` on the frame *after*
-  // next so the browser has actually painted the off-screen starting
-  // position before we animate to the open one — a single rAF can fire
-  // before that paint happens, which makes the drawer "snap" open instead
-  // of sliding in.
   useEffect(() => {
     if (open) {
       setMounted(true);

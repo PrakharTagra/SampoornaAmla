@@ -6,10 +6,6 @@ const STEPS = [
   { id: 3, label: "Review" },
 ];
 
-// Steps before `current` are clickable (go back to fix something); the
-// current step and anything after are not, since later steps haven't been
-// validated yet. This mirrors the review step's "Edit" links rather than
-// introducing a second way to navigate.
 export default function StepIndicator({ current, onStepClick }) {
   return (
     <ol className="flex items-center gap-2 xs:gap-3">

@@ -1,11 +1,6 @@
-// Phase 6: pure validation helpers for the checkout flow. Kept framework-free
-// so CheckoutForm-equivalent step components can call the same rules the
-// review step re-checks before "Place Order" — one source of truth instead
-// of re-implementing regexes per field.
-
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_RE = /^[6-9]\d{9}$/; // Indian mobile numbers: 10 digits, starts 6-9
-const PINCODE_RE = /^[1-9]\d{5}$/; // Indian PIN codes: 6 digits, doesn't start 0
+const PHONE_RE = /^[6-9]\d{9}$/;
+const PINCODE_RE = /^[1-9]\d{5}$/;
 const UPI_RE = /^[\w.+-]+@[\w.-]+$/;
 const CARD_NUMBER_RE = /^\d{13,16}$/;
 const CARD_EXPIRY_RE = /^(0[1-9]|1[0-2])\/\d{2}$/;
@@ -62,7 +57,6 @@ export function validatePayment(payment) {
       errors.cardCvv = "Enter a valid CVV.";
     }
   }
-  // "cod" has no fields to validate.
   return errors;
 }
 

@@ -30,9 +30,6 @@ export default function ProductDetail() {
   const { slug } = useParams();
   const product = getProductBySlug(slug);
 
-  // Invalid product slugs must result in a graceful not-found experience
-  // (Section 9 route contract), so we render the same NotFound page in
-  // place rather than a bespoke error state.
   if (!product) return <NotFound />;
 
   return <ProductDetailContent product={product} />;
@@ -45,9 +42,6 @@ function ProductDetailContent({ product }) {
   const [quantity, setQuantity] = useState(1);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
 
-  // If the user navigates from one product detail page to another via a
-  // related-product link, reset the local selection to the new product's
-  // own first variant/quantity rather than carrying over stale state.
   useEffect(() => {
     setSelectedVariant(product.variants[0]);
     setQuantity(1);

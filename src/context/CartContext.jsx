@@ -1,17 +1,10 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { products } from "../data/products";
 
-// Phase 2/5: a cart line is identified by productId + variantId (Section 8
-// of implementation.md). Quantity is independent of variant, so "500 g x 2"
-// stays two 500 g lines rather than collapsing into a 1 kg line.
 const CartContext = createContext(undefined);
 
 const STORAGE_KEY = "pratapgarh-amla-cart";
 
-// Placeholder shipping rule: no real client shipping policy was supplied,
-// so a flat fee below a free-shipping threshold is used as a stand-in.
-// Update these two constants (or replace with a real shipping calculation)
-// once real rates are available — flagged again in this phase's Known Issues.
 const FREE_SHIPPING_THRESHOLD = 499;
 const SHIPPING_FEE = 49;
 
@@ -23,8 +16,6 @@ function readStoredItems() {
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed : [];
   } catch {
-    // Corrupt or unavailable storage should never crash the app — fall
-    // back to an empty cart rather than throwing during render.
     return [];
   }
 }
@@ -39,16 +30,10 @@ export function CartProvider({ children }) {
   const [items, setItems] = useState(readStoredItems);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  // Persist on every change. Reading happens once, lazily, in useState above
-  // so a freshly mounted app doesn't briefly render an empty cart before
-  // localStorage is read.
   useEffect(() => {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-    } catch {
-      // Storage can fail (private browsing, quota) — the cart still works
-      // in-memory for the session, it just won't persist across reloads.
-    }
+    } catch {}
   }, [items]);
 
   const addItem = useCallback((product, variant, quantity) => {
@@ -119,7 +104,6 @@ export function CartProvider({ children }) {
     subtotal,
     shipping,
     total,
-    freeShippingThreshold: FREE_SHIPPING_THRESHOLD,
     amountToFreeShipping,
     addItem,
     removeItem,

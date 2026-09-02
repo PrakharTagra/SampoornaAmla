@@ -1,8 +1,5 @@
 import { MapPin, TreeDeciduous, Wheat, Factory, ShieldCheck, PackageCheck } from "lucide-react";
 
-// Section 17's Journey, data-driven (an array, not six hand-written JSX
-// blocks) so a step can be added/reworded without touching the layout
-// markup — the same "data over duplicated JSX" approach used for products.
 const STEPS = [
   { icon: MapPin, title: "Pratapgarh", description: "Where the journey begins, in Uttar Pradesh." },
   { icon: TreeDeciduous, title: "Amla Farms", description: "Sourced from the region's Aonla orchards." },
@@ -15,10 +12,6 @@ const STEPS = [
 export default function StoryTimeline() {
   return (
     <ol className="relative flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-6 gap-x-6 gap-y-10">
-      {/* Connecting line: a vertical rule on mobile/tablet (steps stack), a
-          horizontal rule across the top of the icons on desktop (steps sit
-          side by side) — two different `<hr>`-style rules rather than one
-          element trying to serve both orientations. */}
       <span className="sm:hidden absolute left-5 top-2 bottom-2 w-px bg-brown/15" aria-hidden="true" />
       <span className="hidden lg:block absolute top-5 left-[calc(100%/12)] right-[calc(100%/12)] h-px bg-brown/15" aria-hidden="true" />
 

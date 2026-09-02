@@ -1,12 +1,3 @@
-// Full product data contract (implementation.md Section 7).
-// The UI (ProductQuickView, ProductDetail, ProductCard, collection page)
-// must consume this dynamically and never hard-code pack sizes or prices.
-//
-// Photography: `images`/`thumbnail` are left `null` as placeholders since no
-// real product photography was supplied. ProductImage renders a tasteful
-// fallback. Populating a URL here is the only change needed to swap in real
-// photos — no component changes required.
-
 export const products = [
   {
     id: "pure-amla",
@@ -94,9 +85,6 @@ export const products = [
   },
 ];
 
-// Human-readable labels for each `product.category` value. Shared by the
-// Product Detail page (category badge) and the Products collection page
-// (category filter nav) so the two stay in sync as categories are added.
 export const CATEGORY_LABELS = {
   fruit: "Whole Fruit",
   powder: "Powder",

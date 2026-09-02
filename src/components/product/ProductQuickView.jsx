@@ -23,7 +23,6 @@ export default function ProductQuickView({ product, open, onClose }) {
   const { addItem, closeDrawer } = useCart();
   const navigate = useNavigate();
 
-  // Reset selection whenever a different product is opened.
   useEffect(() => {
     if (product) {
       setSelectedVariant(product.variants[0]);

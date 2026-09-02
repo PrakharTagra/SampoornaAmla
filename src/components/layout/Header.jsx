@@ -40,9 +40,6 @@ export default function Header() {
         <nav className="hidden lg:flex items-center gap-8">
           {NAV_LINKS.map((link) =>
             link.scrollTarget ? (
-              // Section link, not a route: on the homepage this scrolls in
-              // place; from anywhere else it navigates to "/#..." and Home's
-              // own hash effect scrolls once the section has mounted.
               <Link
                 key={link.to}
                 to={link.to}

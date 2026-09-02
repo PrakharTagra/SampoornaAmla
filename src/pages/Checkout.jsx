@@ -42,10 +42,6 @@ export default function Checkout() {
   });
   const [errors, setErrors] = useState({});
 
-  // Snapshot of what was actually ordered — captured at the moment "Place
-  // Order" succeeds, before clearCart() empties `items`, so the
-  // confirmation screen (and the empty-cart guard below) both keep working
-  // once the cart context has nothing left in it.
   const [order, setOrder] = useState(null);
 
   const goToStep = (target) => {
@@ -68,11 +64,6 @@ export default function Checkout() {
   };
 
   const handlePlaceOrder = () => {
-    // Defensive re-validation — the review step can only be reached after
-    // both earlier steps already passed, but this re-checks everything
-    // once more immediately before the mock order is created, rather than
-    // trusting step-navigation state alone (Section 13 Quality Gate:
-    // validation is a required, not optional, part of "complete").
     const combined = {
       ...validateContact(contact),
       ...validateAddress(address),

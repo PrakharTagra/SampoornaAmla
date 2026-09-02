@@ -1,8 +1,6 @@
 import Input from "../primitives/Input";
 import Select from "../primitives/Select";
 
-// Data-driven, not hard-coded into the form markup — matches the
-// "data-driven over hard-coded" principle used for the product catalog.
 const STATES = [
   "Andhra Pradesh", "Bihar", "Delhi", "Gujarat", "Haryana", "Karnataka",
   "Kerala", "Madhya Pradesh", "Maharashtra", "Punjab", "Rajasthan",

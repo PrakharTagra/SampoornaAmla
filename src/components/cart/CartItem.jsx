@@ -12,10 +12,6 @@ function getVariantStock(productId, variantId) {
   return variant?.stock ?? 20;
 }
 
-// `dense` renders the compact drawer treatment (smaller thumbnail, tighter
-// gaps); the full Cart page uses the default, larger treatment. Both share
-// the same markup and cart logic so quantity/remove behavior can't drift
-// between the two surfaces.
 export default function CartItem({ item, dense = false }) {
   const { updateQuantity, removeItem } = useCart();
   const lineTotal = item.price * item.quantity;

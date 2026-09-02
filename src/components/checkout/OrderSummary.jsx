@@ -2,10 +2,6 @@ import ProductImage from "../primitives/ProductImage";
 import Divider from "../primitives/Divider";
 import { formatINR } from "../primitives/Price";
 
-// A read-only counterpart to CartSummary/CartItem: checkout shouldn't let
-// quantities be edited mid-flow (that's what the Cart page is for), so this
-// renders the same totals plus a compact, non-interactive line-item list
-// rather than reusing CartItem's editable controls.
 export default function OrderSummary({ items, subtotal, shipping, total }) {
   return (
     <div className="flex flex-col gap-5">

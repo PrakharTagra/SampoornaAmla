@@ -1,11 +1,6 @@
 import { Banknote, Smartphone, CreditCard } from "lucide-react";
 import Input from "../primitives/Input";
 
-// Phase 6: payment is entirely mock — no gateway is wired up (Section 3 /
-// Quality Gate: "if functionality is only mocked ... document it
-// explicitly", also flagged in this phase's Known Issues). Selecting a
-// method and filling its fields only feeds the review step and the mock
-// order confirmation; nothing is transmitted anywhere.
 const METHODS = [
   { id: "cod", label: "Cash on Delivery", description: "Pay when your order arrives.", icon: Banknote },
   { id: "upi", label: "UPI", description: "Pay via any UPI app.", icon: Smartphone },
