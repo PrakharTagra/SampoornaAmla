@@ -9,11 +9,10 @@ import CartSummary from "../components/cart/CartSummary";
 import PageTransition from "../animations/PageTransition";
 import FadeIn from "../animations/FadeIn";
 import { useCart } from "../hooks/useCart";
-import { checkoutAndCartData } from "../data/sitedata";
 
 export default function Cart() {
   const { items, subtotal, shipping, total, amountToFreeShipping } = useCart();
-  const freeShippingThreshold = checkoutAndCartData.freeShippingThreshold || 499;
+  const freeShippingThreshold = 499;
   const progressPercent = Math.min(100, Math.round((subtotal / freeShippingThreshold) * 100));
 
   return (

@@ -5,7 +5,6 @@ import Button from "../primitives/Button";
 import CartItem from "./CartItem";
 import CartSummary from "./CartSummary";
 import { useCart } from "../../hooks/useCart";
-import { checkoutAndCartData } from "../../data/sitedata";
 
 export default function CartDrawer() {
   const {
@@ -24,7 +23,7 @@ export default function CartDrawer() {
     navigate(path);
   };
 
-  const freeShippingTarget = checkoutAndCartData.freeShippingThreshold || 499;
+  const freeShippingTarget = 499;
   const progressPercent = Math.min(100, Math.round((subtotal / freeShippingTarget) * 100));
 
   return (

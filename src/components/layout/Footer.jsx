@@ -6,9 +6,34 @@ import Logo from "../primitives/Logo";
 import { scrollToSection } from "../../lib/scrollToSection";
 import { useToast } from "../../hooks/useToast";
 import FadeIn from "../../animations/FadeIn";
-import { footerData } from "../../data/sitedata";
 
-const GUARANTEE_ICONS = [ShieldCheck, Truck, RotateCcw];
+const COLUMNS = [
+  {
+    title: "Shop Collection",
+    links: [
+      { to: "/products", label: "All Products" },
+      { to: "/products/pure-amla", label: "Pure Fresh Amla" },
+      { to: "/products/amla-powder", label: "Stone-Ground Powder" },
+      { to: "/products/dried-amla", label: "Naturally Dried Amla" },
+    ],
+  },
+  {
+    title: "About Brand",
+    links: [
+      { to: "/about", label: "Our Heritage & Story" },
+      { to: "/#story", label: "Orchard Journey", scrollTarget: "story" },
+      { to: "/contact", label: "Contact Us" },
+    ],
+  },
+  {
+    title: "Customer Care",
+    links: [
+      { to: "/cart", label: "View Cart" },
+      { to: "/checkout", label: "Direct Checkout" },
+      { to: "/contact", label: "FAQs & Inquiries" },
+    ],
+  },
+];
 
 export default function Footer() {
   const location = useLocation();
@@ -21,8 +46,8 @@ export default function Footer() {
     if (!email || !email.includes("@")) return;
     setSubscribed(true);
     addToast({
-      title: footerData.newsletter.successToastTitle,
-      message: footerData.newsletter.successToastMessage,
+      title: "Subscribed Successfully",
+      message: "Thank you for subscribing to Pratapgarh Amla journal.",
       type: "success",
     });
     setEmail("");
@@ -40,23 +65,24 @@ export default function Footer() {
             <div className="lg:col-span-4 flex flex-col gap-4">
               <Logo />
               <p className="text-sm text-brown/75 leading-relaxed max-w-sm">
-                {footerData.aboutText}
+                Authentic, farm-fresh Indian Gooseberry sourced directly from orchards in Pratapgarh, Uttar Pradesh — the Amla capital of India.
               </p>
               <div className="flex flex-col gap-2 pt-2 text-xs text-brown/60">
-                {footerData.trustGuarantees.map((guarantee, i) => {
-                  const Icon = GUARANTEE_ICONS[i % GUARANTEE_ICONS.length];
-                  return (
-                    <span key={guarantee} className="flex items-center gap-2">
-                      <Icon size={16} className="text-gold-50 shrink-0" /> {guarantee}
-                    </span>
-                  );
-                })}
+                <span className="flex items-center gap-2">
+                  <ShieldCheck size={16} className="text-gold-50" /> 100% Purity & Quality Guarantee
+                </span>
+                <span className="flex items-center gap-2">
+                  <Truck size={16} className="text-gold-50" /> Safe, Temperature-Aware Pan-India Dispatch
+                </span>
+                <span className="flex items-center gap-2">
+                  <RotateCcw size={16} className="text-gold-50" /> Direct-from-source freshness
+                </span>
               </div>
             </div>
 
             {/* Nav Columns */}
             <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-8">
-              {footerData.columns.map((col) => (
+              {COLUMNS.map((col) => (
                 <div key={col.title} className="flex flex-col gap-3">
                   <span className="text-xs font-semibold uppercase tracking-wider text-amla-200">
                     {col.title}
@@ -85,10 +111,10 @@ export default function Footer() {
             {/* Newsletter Column */}
             <div className="lg:col-span-3 flex flex-col gap-4">
               <span className="text-xs font-semibold uppercase tracking-wider text-amla-200">
-                {footerData.newsletter.title}
+                Stay In Touch
               </span>
               <p className="text-xs text-brown/70 leading-relaxed">
-                {footerData.newsletter.description}
+                Receive seasonal harvest updates, authentic Amla recipes, and special subscriber benefits.
               </p>
               <form onSubmit={handleSubscribe} className="flex flex-col gap-2.5">
                 <div className="relative flex items-center">
@@ -96,7 +122,7 @@ export default function Footer() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder={footerData.newsletter.placeholder}
+                    placeholder="Enter your email"
                     required
                     className="w-full bg-ivory border border-brown/20 rounded px-3.5 py-2.5 text-sm text-brown placeholder-brown/40 focus:outline-none focus:border-amla-200 pr-10"
                   />
@@ -119,14 +145,13 @@ export default function Footer() {
         </FadeIn>
 
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brown/50">
-          <p>{footerData.copyright}</p>
+          <p>© {new Date().getFullYear()} Pratapgarh Amla (Sampoorna). All rights reserved.</p>
           <div className="flex items-center gap-6">
-            {footerData.bottomBadges.map((badge, i) => (
-              <span key={badge} className="flex items-center gap-6">
-                <span>{badge}</span>
-                {i < footerData.bottomBadges.length - 1 ? <span>·</span> : null}
-              </span>
-            ))}
+            <span>Orchard Fresh</span>
+            <span>·</span>
+            <span>No Artificial Additives</span>
+            <span>·</span>
+            <span>Lab Verified</span>
           </div>
         </div>
       </Container>

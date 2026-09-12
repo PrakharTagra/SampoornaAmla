@@ -6,7 +6,7 @@ import Button from "../primitives/Button";
 
 export default function ProductCard({ product, onQuickView }) {
   return (
-    <div className="group flex h-full min-w-0 flex-col rounded-lg bg-ivory-50/50 p-3.5 border border-brown/10 hover:border-forest/30 hover:shadow-soft hover:-translate-y-1 transition-all duration-300">
+    <div className="group h-full flex flex-col rounded-lg bg-ivory-50/50 p-3.5 border border-brown/10 hover:border-forest/30 hover:shadow-soft hover:-translate-y-1 transition-all duration-300">
       <div className="relative overflow-hidden rounded-md bg-ivory-100">
         <button
           type="button"

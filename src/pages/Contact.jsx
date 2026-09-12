@@ -9,14 +9,60 @@ import Card from "../components/primitives/Card";
 import StaggerContainer from "../animations/StaggerContainer";
 import PageTransition from "../animations/PageTransition";
 import { useToast } from "../hooks/useToast";
-import { contactPageData } from "../data/sitedata";
 
-const ICON_MAP = {
-  Phone,
-  Mail,
-  MapPin,
-  Clock,
-};
+const CONTACT_CHANNELS = [
+  {
+    icon: Phone,
+    title: "Call or WhatsApp",
+    detail: "+91 98765 43210",
+    description: "Mon-Sat from 9:00 AM to 7:00 PM IST",
+    action: "tel:+919876543210",
+  },
+  {
+    icon: Mail,
+    title: "Email Support",
+    detail: "support@pratapgarhamla.com",
+    description: "We typically respond within 2-4 hours",
+    action: "mailto:support@pratapgarhamla.com",
+  },
+  {
+    icon: MapPin,
+    title: "Orchards & Facility",
+    detail: "Pratapgarh, Uttar Pradesh 230001",
+    description: "Registered Agricultural Center & Packhouse",
+    action: "#",
+  },
+  {
+    icon: Clock,
+    title: "Fresh Dispatch Days",
+    detail: "Monday through Friday",
+    description: "Orders placed over the weekend dispatch Monday morning",
+    action: "#",
+  },
+];
+
+const FAQS = [
+  {
+    q: "Where exactly is your Amla sourced from?",
+    a: "Every product in our collection is sourced exclusively from grower networks and family-owned orchards situated in and around Pratapgarh district, Uttar Pradesh. Pratapgarh is globally recognized as the historic heart of Indian Aonla cultivation.",
+  },
+  {
+    q: "Are any synthetic preservatives, colors, or sugars added?",
+    a: "Never. Our philosophy is 100% natural purity. Our whole fruit is untreated, our dried pieces are dried naturally without added sugar or sulfur, and our Amla powder is stone-ground whole fruit with zero fillers.",
+  },
+  {
+    q: "How are products packaged to ensure freshness during delivery?",
+    a: "We use airtight, food-grade, multi-layer barrier pouches and sturdy moisture-resistant packaging that protects delicate Vitamin C nutrients from light, heat, and air degradation during transit across India.",
+  },
+  {
+    q: "Do you offer bulk or institutional orders for wellness brands?",
+    a: "Yes! We fulfill bulk orders for Ayurvedic practitioners, wellness stores, juice bars, and organic cooperatives. Please select 'Bulk / Wholesale Inquiry' in the contact form below or email us directly.",
+  },
+  {
+    q: "What is your return or replacement policy?",
+    a: "If your shipment arrives damaged, unsealed, or compromised in any way, contact us within 48 hours of delivery and we will promptly send a replacement or issue a full refund.",
+  },
+];
 
 export default function Contact() {
   const { addToast } = useToast();
@@ -24,20 +70,12 @@ export default function Contact() {
     name: "",
     email: "",
     phone: "",
-    subject: contactPageData.inquirySubjects[0]?.value || "Order Inquiry",
+    subject: "Order Inquiry",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
-
-  const channels = contactPageData.channels.map((ch) => ({
-    icon: ICON_MAP[ch.iconName] || Mail,
-    title: ch.title,
-    detail: ch.detail,
-    description: ch.description,
-    action: ch.action,
-  }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,7 +93,7 @@ export default function Contact() {
         name: "",
         email: "",
         phone: "",
-        subject: contactPageData.inquirySubjects[0]?.value || "Order Inquiry",
+        subject: "Order Inquiry",
         message: "",
       });
     }, 600);
@@ -71,9 +109,9 @@ export default function Contact() {
       <section className="py-8 sm:py-12">
         <Container className="flex flex-col gap-4">
           <SectionHeading
-            eyebrow={contactPageData.eyebrow}
-            title={contactPageData.title}
-            description={contactPageData.description}
+            eyebrow="Get In Touch"
+            title="We'd love to hear from you"
+            description="Have questions about our harvest, products, pan-India delivery, or bulk orders? Reach out to our team."
           />
         </Container>
       </section>
@@ -85,7 +123,7 @@ export default function Contact() {
             staggerDelay={90}
             className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch"
           >
-            {channels.map((channel) => (
+            {CONTACT_CHANNELS.map((channel) => (
               <Card
                 key={channel.title}
                 className="flex h-full min-h-[15rem] flex-col gap-3 p-6 rounded-lg !bg-forest border border-forest shadow-soft hover:bg-forest-50 hover:-translate-y-1 transition-all duration-300"
@@ -182,11 +220,10 @@ export default function Contact() {
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       className="rounded border border-brown/20 bg-ivory-50 px-3.5 py-2.5 text-sm text-brown focus:border-forest focus:outline-none transition-colors"
                     >
-                      {contactPageData.inquirySubjects.map((sub) => (
-                        <option key={sub.value} value={sub.value}>
-                          {sub.label}
-                        </option>
-                      ))}
+                      <option value="Order Inquiry">Order & Delivery Inquiry</option>
+                      <option value="Product Details">Product Benefits & Quality</option>
+                      <option value="Bulk / Wholesale">Bulk / Wholesale Inquiry</option>
+                      <option value="Feedback">Feedback or Suggestions</option>
                     </select>
                   </div>
                 </div>
@@ -231,7 +268,7 @@ export default function Contact() {
             </div>
 
             <div className="flex flex-col gap-3">
-              {contactPageData.faqs.map((faq, index) => {
+              {FAQS.map((faq, index) => {
                 const isOpen = openFaq === index;
                 return (
                   <div
@@ -264,7 +301,7 @@ export default function Contact() {
             <div className="p-5 rounded-lg bg-forest border border-forest flex items-center gap-3 mt-2 shadow-sm">
               <MessageSquare className="text-gold-50 shrink-0" size={20} />
               <p className="text-xs text-ivory/85 leading-relaxed">
-                {contactPageData.whatsappNotice}
+                Need immediate bulk assistance? You can also message our dispatch line directly via WhatsApp at <strong>+91 98765 43210</strong>.
               </p>
             </div>
           </div>
