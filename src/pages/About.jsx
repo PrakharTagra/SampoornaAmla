@@ -7,42 +7,17 @@ import BackgroundImage from "../components/primitives/BackgroundImage";
 import FadeIn from "../animations/FadeIn";
 import StaggerContainer from "../animations/StaggerContainer";
 import PageTransition from "../animations/PageTransition";
+import { aboutPageData } from "../data/sitedata";
 
-const STATS = [
-  { value: "100%", label: "Pure Pratapgarh Origin", description: "Direct from native cultivars" },
-  { value: "0%", label: "Artificial Additives", description: "No synthetic preservatives or colors" },
-  { value: "40+", label: "Family Orchards", description: "Fairly sourced from regional growers" },
-  { value: "3x", label: "Vitamin C Density", description: "Naturally preserved through traditional care" },
-];
-
-const PILLARS = [
-  {
-    icon: MapPin,
-    title: "Orchard Traceability",
-    description:
-      "Unlike mass-market commodity brokers, we trace every harvest batch to certified regional orchards in Pratapgarh, Uttar Pradesh.",
-  },
-  {
-    icon: Leaf,
-    title: "Respect for Nature",
-    description:
-      "We follow gentle harvesting cycles that align with the natural fruiting season, allowing trees to thrive for generations.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Stone-Ground & Sun-Dried",
-    description:
-      "Our processing avoids high-temperature heat friction, retaining the sensitive Vitamin C compounds and raw polyphenols.",
-  },
-  {
-    icon: Users,
-    title: "Empowering Local Farmers",
-    description:
-      "By purchasing directly at fair baseline prices, we ensure local farming families share in the value of their agricultural craft.",
-  },
-];
+const ICON_MAP = { MapPin, Leaf, ShieldCheck, Users };
 
 export default function About() {
+  const { stats, pillars } = aboutPageData;
+  const mappedPillars = pillars.map((pillar) => ({
+    ...pillar,
+    icon: ICON_MAP[pillar.iconName] || Leaf,
+  }));
+
   return (
     <PageTransition>
       <Container className="pt-6 sm:pt-8">
@@ -67,7 +42,7 @@ export default function About() {
             staggerDelay={90}
             className="grid grid-cols-2 lg:grid-cols-4 gap-6"
           >
-            {STATS.map((stat) => (
+            {stats.map((stat) => (
               <div
                 key={stat.label}
                 className="flex flex-col items-center text-center p-6 rounded-lg bg-ivory-50/80 border border-brown/10 shadow-card"
@@ -132,7 +107,7 @@ export default function About() {
             staggerDelay={100}
             className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
-            {PILLARS.map((pillar) => (
+            {mappedPillars.map((pillar) => (
               <Card
                 key={pillar.title}
                 className="flex h-full flex-col gap-3.5 p-6 rounded-lg bg-ivory border border-brown/10 shadow-card hover:border-forest/40 hover:-translate-y-1 transition-all duration-300"

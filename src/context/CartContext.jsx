@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { products } from "../data/products";
+import { products } from "../data/sitedata";
 import { CartContext } from "./cart-context";
 
 const STORAGE_KEY = "pratapgarh-amla-cart";

@@ -8,15 +8,9 @@ import { useCart } from "../../hooks/useCart";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
 import { scrollToSection } from "../../lib/scrollToSection";
 import MobileMenu from "./MobileMenu";
-import { products } from "../../data/products";
+import { navigation, siteMetadata, products } from "../../data/sitedata";
 
-const NAV_LINKS = [
-  { to: "/", label: "Home", end: true },
-  { to: "/products", label: "Products" },
-  { to: "/about", label: "About Us" },
-  { to: "/#story", label: "Our Story", scrollTarget: "story" },
-  { to: "/contact", label: "Contact" },
-];
+const NAV_LINKS = navigation.headerLinks;
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -48,7 +42,7 @@ export default function Header() {
       }`}
     >
       <Container className="flex items-center justify-between h-16 sm:h-20 transition-all duration-300">
-        <NavLink to="/" aria-label="Pratapgarh Amla — home" className="transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]">
+        <NavLink to="/" aria-label={`${siteMetadata.brandName} — home`} className="transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]">
           <Logo imageClassName="h-10 sm:h-14" className="origin-left scale-90 sm:scale-100" />
         </NavLink>
 

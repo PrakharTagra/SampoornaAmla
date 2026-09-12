@@ -1,35 +1,17 @@
 import { useEffect, useState } from "react";
-import { Leaf, MapPin, Truck } from "lucide-react";
 import Container from "../primitives/Container";
 import Button from "../primitives/Button";
 import BackgroundImage from "../primitives/BackgroundImage";
+import { Leaf, MapPin, Truck } from "lucide-react";
+import { heroData } from "../../data/sitedata";
 
-const ATTRIBUTES = [
-  { icon: Leaf, label: "100% Natural" },
-  { icon: MapPin, label: "Carefully Sourced" },
-  { icon: Truck, label: "Pan-India Delivery" },
-];
-
-const SLIDES = [
-  {
-    id: 1,
-    eyebrow: "Royal Pratapgarh Heritage",
-    title: "Direct from the orchards of Aonla",
-    description: "Pure, nutrient-dense Indian Gooseberry handpicked from the historic city of Aonla, delivered fresh pan-India.",
-    image: "/images/hero/banner-royal.png",
-    imageAlt: "Pratapgarh Amla — Royal Orchard Heritage",
-  },
-  {
-    id: 2,
-    eyebrow: "Ayurvedic Purity & Immunity",
-    title: "Nature's greatest source of Vitamin C",
-    description: "Preserved through gentle, time-tested methods without synthetic additives, artificial colors, or chemical fillers.",
-    image: "/images/hero/banner-ayurvedic.png",
-    imageAlt: "Pratapgarh Amla — Ayurvedic Superfood",
-  },
-];
-
-const SLIDE_DURATION = 6000;
+const ICON_MAP = { Leaf, MapPin, Truck };
+const ATTRIBUTES = heroData.attributes.map((attribute) => ({
+  icon: ICON_MAP[attribute.iconName] || Leaf,
+  label: attribute.label,
+}));
+const SLIDES = heroData.slides;
+const SLIDE_DURATION = heroData.slideDuration;
 
 export default function Hero() {
   const [active, setActive] = useState(0);

@@ -1,11 +1,8 @@
 import { Banknote, Smartphone, CreditCard } from "lucide-react";
 import Input from "../primitives/Input";
+import { checkoutData } from "../../data/sitedata";
 
-const METHODS = [
-  { id: "cod", label: "Cash on Delivery", description: "Pay when your order arrives.", icon: Banknote },
-  { id: "upi", label: "UPI", description: "Pay via any UPI app.", icon: Smartphone },
-  { id: "card", label: "Credit / Debit Card", description: "Visa, Mastercard, RuPay.", icon: CreditCard },
-];
+const ICON_MAP = { cod: Banknote, upi: Smartphone, card: CreditCard };
 
 export default function PaymentSelector({ value, errors, onChange }) {
   const setMethod = (method) => onChange({ ...value, method });
@@ -14,7 +11,8 @@ export default function PaymentSelector({ value, errors, onChange }) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-3">
-        {METHODS.map(({ id, label, description, icon: Icon }) => {
+        {checkoutData.paymentMethods.map(({ id, label, description }) => {
+          const Icon = ICON_MAP[id] || Banknote;
           const selected = value.method === id;
           return (
             <label

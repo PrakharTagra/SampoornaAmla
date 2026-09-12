@@ -6,34 +6,7 @@ import Logo from "../primitives/Logo";
 import { scrollToSection } from "../../lib/scrollToSection";
 import { useToast } from "../../hooks/useToast";
 import FadeIn from "../../animations/FadeIn";
-
-const COLUMNS = [
-  {
-    title: "Shop Collection",
-    links: [
-      { to: "/products", label: "All Products" },
-      { to: "/products/pure-amla", label: "Pure Fresh Amla" },
-      { to: "/products/amla-powder", label: "Stone-Ground Powder" },
-      { to: "/products/dried-amla", label: "Naturally Dried Amla" },
-    ],
-  },
-  {
-    title: "About Brand",
-    links: [
-      { to: "/about", label: "Our Heritage & Story" },
-      { to: "/#story", label: "Orchard Journey", scrollTarget: "story" },
-      { to: "/contact", label: "Contact Us" },
-    ],
-  },
-  {
-    title: "Customer Care",
-    links: [
-      { to: "/cart", label: "View Cart" },
-      { to: "/checkout", label: "Direct Checkout" },
-      { to: "/contact", label: "FAQs & Inquiries" },
-    ],
-  },
-];
+import { footerData, navigation } from "../../data/sitedata";
 
 export default function Footer() {
   const location = useLocation();
@@ -46,8 +19,8 @@ export default function Footer() {
     if (!email || !email.includes("@")) return;
     setSubscribed(true);
     addToast({
-      title: "Subscribed Successfully",
-      message: "Thank you for subscribing to Pratapgarh Amla journal.",
+      title: footerData.subscribeSuccessTitle,
+      message: footerData.subscribeSuccessMessage,
       type: "success",
     });
     setEmail("");
@@ -65,7 +38,7 @@ export default function Footer() {
             <div className="lg:col-span-4 flex flex-col gap-4">
               <Logo />
               <p className="text-sm text-brown/75 leading-relaxed max-w-sm">
-                Authentic, farm-fresh Indian Gooseberry sourced directly from orchards in Pratapgarh, Uttar Pradesh — the Amla capital of India.
+                {footerData.description}
               </p>
               <div className="flex flex-col gap-2 pt-2 text-xs text-brown/60">
                 <span className="flex items-center gap-2">
@@ -82,7 +55,7 @@ export default function Footer() {
 
             {/* Nav Columns */}
             <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-8">
-              {COLUMNS.map((col) => (
+              {navigation.footerColumns.map((col) => (
                 <div key={col.title} className="flex flex-col gap-3">
                   <span className="text-xs font-semibold uppercase tracking-wider text-amla-200">
                     {col.title}

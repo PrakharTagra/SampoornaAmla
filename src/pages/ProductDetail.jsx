@@ -17,17 +17,13 @@ import ProductGrid from "../components/product/ProductGrid";
 import ProductQuickView from "../components/product/ProductQuickView";
 import PageTransition from "../animations/PageTransition";
 import FadeIn from "../animations/FadeIn";
-import { getProductBySlug, getRelatedProducts, CATEGORY_LABELS } from "../data/products";
+import { getProductBySlug, getRelatedProducts, CATEGORY_LABELS } from "../data/sitedata";
+import { productDetailData } from "../data/sitedata";
 import { useCart } from "../hooks/useCart";
 import { useToast } from "../hooks/useToast";
 import NotFound from "./NotFound";
 
-const TRUST_ITEMS = [
-  { icon: Leaf, label: "100% Pure & Unadulterated" },
-  { icon: ShieldCheck, label: "Rigorous Lab Tested" },
-  { icon: PackageCheck, label: "Airtight Seal Packaging" },
-  { icon: Truck, label: "Pan-India Express Dispatch" },
-];
+const TRUST_ICON_MAP = { Leaf, ShieldCheck, PackageCheck, Truck };
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -53,6 +49,10 @@ function ProductDetailContent({ product }) {
 
   const totalPrice = selectedVariant.price * quantity;
   const related = getRelatedProducts(product);
+  const trustItems = productDetailData.trustItems.map((item) => ({
+    icon: TRUST_ICON_MAP[item.iconName] || Leaf,
+    label: item.label,
+  }));
 
   const handleAddToCart = () => {
     addItem(product, selectedVariant, quantity);
@@ -165,7 +165,7 @@ function ProductDetailContent({ product }) {
             </div>
 
             <div className="grid grid-cols-2 gap-x-4 gap-y-3 pt-5 border-t border-brown/10">
-              {TRUST_ITEMS.map((item) => (
+              {trustItems.map((item) => (
                 <TrustItem key={item.label} icon={item.icon} label={item.label} labelClassName="text-xs" />
               ))}
             </div>

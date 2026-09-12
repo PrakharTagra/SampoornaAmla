@@ -4,7 +4,7 @@ import ProductImage from "../primitives/ProductImage";
 import Price from "../primitives/Price";
 import QuantitySelector from "../primitives/QuantitySelector";
 import { useCart } from "../../hooks/useCart";
-import { products } from "../../data/products";
+import { products } from "../../data/sitedata";
 
 function getVariantStock(productId, variantId) {
   const product = products.find((p) => p.id === productId);

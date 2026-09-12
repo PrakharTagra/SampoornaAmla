@@ -10,7 +10,7 @@ import ProductGrid from "../components/product/ProductGrid";
 import ProductQuickView from "../components/product/ProductQuickView";
 import FadeIn from "../animations/FadeIn";
 import PageTransition from "../animations/PageTransition";
-import { products } from "../data/products";
+import { products } from "../data/sitedata";
 
 export default function Home() {
   const [quickViewProduct, setQuickViewProduct] = useState(null);

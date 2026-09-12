@@ -1,11 +1,6 @@
 import Input from "../primitives/Input";
 import Select from "../primitives/Select";
-
-const STATES = [
-  "Andhra Pradesh", "Bihar", "Delhi", "Gujarat", "Haryana", "Karnataka",
-  "Kerala", "Madhya Pradesh", "Maharashtra", "Punjab", "Rajasthan",
-  "Tamil Nadu", "Telangana", "Uttar Pradesh", "Uttarakhand", "West Bengal",
-];
+import { checkoutData } from "../../data/sitedata";
 
 export default function AddressFields({ value, errors, onChange }) {
   const set = (field) => (e) => onChange({ ...value, [field]: e.target.value });
@@ -42,7 +37,7 @@ export default function AddressFields({ value, errors, onChange }) {
       />
       <Select id="state" label="State" value={value.state} onChange={set("state")} error={errors.state}>
         <option value="">Select state</option>
-        {STATES.map((s) => (
+        {checkoutData.states.map((s) => (
           <option key={s} value={s}>
             {s}
           </option>

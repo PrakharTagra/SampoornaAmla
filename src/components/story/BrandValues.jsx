@@ -1,37 +1,23 @@
 import { Landmark, Leaf, Package, HeartHandshake } from "lucide-react";
 import Card from "../primitives/Card";
 import StaggerContainer from "../../animations/StaggerContainer";
+import { storyData } from "../../data/sitedata";
 
-const VALUES = [
-  {
-    icon: Landmark,
-    title: "Authentic Origin",
-    description: "Every product traces back directly to indigenous orchards in Pratapgarh.",
-  },
-  {
-    icon: Leaf,
-    title: "100% Natural",
-    description: "Amla in its most pristine, potent form, without shortcuts or synthetic fillers.",
-  },
-  {
-    icon: Package,
-    title: "Careful Packing",
-    description: "Protected in hygienic, moisture-locking packages to arrive fresh as harvest.",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Customer Trust",
-    description: "Honest practices, transparent lab standards, and responsive Indian support.",
-  },
-];
+const ICON_MAP = { Landmark, Leaf, Package, HeartHandshake };
 
 export default function BrandValues() {
+  const values = storyData.values.map((value) => ({
+    icon: ICON_MAP[value.iconName] || Leaf,
+    title: value.title,
+    description: value.description,
+  }));
+
   return (
     <StaggerContainer
       staggerDelay={100}
       className="grid xs:grid-cols-2 lg:grid-cols-4 gap-5"
     >
-      {VALUES.map((value) => (
+      {values.map((value) => (
         <Card
           key={value.title}
           className="group flex flex-col gap-3.5 p-6 rounded-lg border border-forest/15 !bg-ivory shadow-sm hover:border-forest/35 hover:shadow-soft hover:-translate-y-1 transition-all duration-300"

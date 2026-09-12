@@ -1,10 +1,7 @@
 import { Check } from "lucide-react";
+import { checkoutData } from "../../data/sitedata";
 
-const STEPS = [
-  { id: 1, label: "Details" },
-  { id: 2, label: "Payment" },
-  { id: 3, label: "Review" },
-];
+const STEPS = checkoutData.steps.map((label, index) => ({ id: index + 1, label }));
 
 export default function StepIndicator({ current, onStepClick }) {
   return (
