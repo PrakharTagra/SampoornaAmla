@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import { products } from "../data/products";
+import { products, checkoutAndCartData } from "../data/sitedata";
 import { CartContext } from "./cart-context";
 
-const STORAGE_KEY = "pratapgarh-amla-cart";
-
-const FREE_SHIPPING_THRESHOLD = 499;
-const SHIPPING_FEE = 49;
+const STORAGE_KEY = checkoutAndCartData.storageKey || "pratapgarh-amla-cart";
+const FREE_SHIPPING_THRESHOLD = checkoutAndCartData.freeShippingThreshold || 499;
+const SHIPPING_FEE = checkoutAndCartData.shippingFee || 49;
 
 function readStoredItems() {
   if (typeof window === "undefined") return [];

@@ -17,17 +17,22 @@ import ProductGrid from "../components/product/ProductGrid";
 import ProductQuickView from "../components/product/ProductQuickView";
 import PageTransition from "../animations/PageTransition";
 import FadeIn from "../animations/FadeIn";
-import { getProductBySlug, getRelatedProducts, CATEGORY_LABELS } from "../data/products";
+import { getProductBySlug, getRelatedProducts, CATEGORY_LABELS, checkoutAndCartData } from "../data/sitedata";
 import { useCart } from "../hooks/useCart";
 import { useToast } from "../hooks/useToast";
 import NotFound from "./NotFound";
 
-const TRUST_ITEMS = [
-  { icon: Leaf, label: "100% Pure & Unadulterated" },
-  { icon: ShieldCheck, label: "Rigorous Lab Tested" },
-  { icon: PackageCheck, label: "Airtight Seal Packaging" },
-  { icon: Truck, label: "Pan-India Express Dispatch" },
-];
+const ICON_MAP = {
+  Leaf,
+  ShieldCheck,
+  PackageCheck,
+  Truck,
+};
+
+const TRUST_ITEMS = checkoutAndCartData.trustItems.map((item) => ({
+  icon: ICON_MAP[item.iconName] || Leaf,
+  label: item.label,
+}));
 
 export default function ProductDetail() {
   const { slug } = useParams();

@@ -3,33 +3,21 @@ import { Leaf, MapPin, Truck } from "lucide-react";
 import Container from "../primitives/Container";
 import Button from "../primitives/Button";
 import BackgroundImage from "../primitives/BackgroundImage";
+import { heroData } from "../../data/sitedata";
 
-const ATTRIBUTES = [
-  { icon: Leaf, label: "100% Natural" },
-  { icon: MapPin, label: "Carefully Sourced" },
-  { icon: Truck, label: "Pan-India Delivery" },
-];
+const ICON_MAP = {
+  Leaf,
+  MapPin,
+  Truck,
+};
 
-const SLIDES = [
-  {
-    id: 1,
-    eyebrow: "Royal Pratapgarh Heritage",
-    title: "Direct from the orchards of Aonla",
-    description: "Pure, nutrient-dense Indian Gooseberry handpicked from the historic city of Aonla, delivered fresh pan-India.",
-    image: "/images/hero/banner-royal.png",
-    imageAlt: "Pratapgarh Amla — Royal Orchard Heritage",
-  },
-  {
-    id: 2,
-    eyebrow: "Ayurvedic Purity & Immunity",
-    title: "Nature's greatest source of Vitamin C",
-    description: "Preserved through gentle, time-tested methods without synthetic additives, artificial colors, or chemical fillers.",
-    image: "/images/hero/banner-ayurvedic.png",
-    imageAlt: "Pratapgarh Amla — Ayurvedic Superfood",
-  },
-];
+const ATTRIBUTES = heroData.attributes.map((attr) => ({
+  icon: ICON_MAP[attr.iconName] || Leaf,
+  label: attr.label,
+}));
 
-const SLIDE_DURATION = 6000;
+const SLIDES = heroData.slides;
+const SLIDE_DURATION = heroData.slideDuration || 6000;
 
 export default function Hero() {
   const [active, setActive] = useState(0);
@@ -99,7 +87,7 @@ export default function Hero() {
               className="w-fit shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
               onClick={scrollToCollection}
             >
-              Shop Amla Collection
+              {slide.ctaLabel || "Shop Amla Collection"}
             </Button>
           </div>
         </div>

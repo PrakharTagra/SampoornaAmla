@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import { CheckCircle2, Package, Sparkles } from "lucide-react";
 import Button from "../primitives/Button";
 import { formatINR } from "../../utils/formatters";
+import { checkoutAndCartData } from "../../data/sitedata";
 
 export default function OrderConfirmation({ orderId, email, total }) {
+  const conf = checkoutAndCartData.orderConfirmation;
+
   return (
     <div className="flex flex-col items-center gap-6 text-center py-16 max-w-lg mx-auto animate-fade-in-scale">
       <div className="relative">
@@ -15,13 +18,13 @@ export default function OrderConfirmation({ orderId, email, total }) {
 
       <div className="flex flex-col gap-2">
         <span className="inline-flex items-center justify-center gap-1 text-xs font-semibold uppercase tracking-wider text-amla-200">
-          <Sparkles size={13} /> Order Successful
+          <Sparkles size={13} /> {conf.eyebrow}
         </span>
         <h2 className="font-serif text-3xl sm:text-4xl font-bold text-brown">
-          Thank you for your order!
+          {conf.title}
         </h2>
         <p className="text-sm text-brown/70 leading-relaxed max-w-sm mx-auto">
-          We have received your order and are preparing your fresh Pratapgarh Amla package.
+          {conf.description}{" "}
           A confirmation has been sent to <strong className="text-brown">{email}</strong>.
         </p>
       </div>
@@ -39,7 +42,7 @@ export default function OrderConfirmation({ orderId, email, total }) {
 
       <div className="flex items-center gap-2 text-xs text-brown/60 bg-ivory-50 px-4 py-2 rounded-full border border-brown/10">
         <Package size={14} className="text-forest" />
-        <span>Estimated dispatch in 24 hours · Delivery in 3–5 business days</span>
+        <span>{conf.dispatchEstimate}</span>
       </div>
 
       <div className="flex flex-col xs:flex-row gap-3 mt-2 w-full justify-center">

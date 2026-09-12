@@ -7,7 +7,7 @@ import ProductGrid from "../components/product/ProductGrid";
 import ProductQuickView from "../components/product/ProductQuickView";
 import PageTransition from "../animations/PageTransition";
 import FadeIn from "../animations/FadeIn";
-import { products, CATEGORY_LABELS } from "../data/products";
+import { products, CATEGORY_LABELS } from "../data/sitedata";
 
 export default function Products() {
   const [activeCategory, setActiveCategory] = useState("all");
