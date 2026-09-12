@@ -1,14 +1,17 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import ScrollToTop from "./ScrollToTop";
 import CartDrawer from "../cart/CartDrawer";
+import Toast from "../ui/Toast";
 
 export default function Layout() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col selection:bg-forest/20 selection:text-forest">
+      <ScrollToTop />
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-sm focus:bg-forest focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-ivory"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-sm focus:bg-forest focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-ivory shadow-soft"
       >
         Skip to content
       </a>
@@ -18,6 +21,7 @@ export default function Layout() {
       </main>
       <Footer />
       <CartDrawer />
+      <Toast />
     </div>
   );
 }

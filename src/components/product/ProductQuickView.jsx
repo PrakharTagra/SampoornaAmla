@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Star, Leaf, ShieldCheck, PackageCheck, Truck } from "lucide-react";
 import Modal from "../primitives/Modal";
@@ -8,7 +8,7 @@ import Price from "../primitives/Price";
 import TrustItem from "../primitives/TrustItem";
 import ProductGallery from "./ProductGallery";
 import VariantSelector from "./VariantSelector";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../hooks/useCart";
 
 const TRUST_ITEMS = [
   { icon: Leaf, label: "Natural / No Preservatives" },
@@ -18,19 +18,20 @@ const TRUST_ITEMS = [
 ];
 
 export default function ProductQuickView({ product, open, onClose }) {
-  const [selectedVariant, setSelectedVariant] = useState(product?.variants?.[0] ?? null);
+  if (!product) return null;
+
+  return (
+    <Modal open={open} onClose={onClose} labelledBy="quick-view-title">
+      <ProductQuickViewContent key={product.id} product={product} onClose={onClose} />
+    </Modal>
+  );
+}
+
+function ProductQuickViewContent({ product, onClose }) {
+  const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
   const [quantity, setQuantity] = useState(1);
   const { addItem, closeDrawer } = useCart();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (product) {
-      setSelectedVariant(product.variants[0]);
-      setQuantity(1);
-    }
-  }, [product]);
-
-  if (!product || !selectedVariant) return null;
 
   const totalPrice = selectedVariant.price * quantity;
 
@@ -47,9 +48,8 @@ export default function ProductQuickView({ product, open, onClose }) {
   };
 
   return (
-    <Modal open={open} onClose={onClose} labelledBy="quick-view-title">
-      <div className="grid sm:grid-cols-2 gap-6 sm:gap-8 p-6 sm:p-8">
-        <ProductGallery images={product.images} name={product.name} />
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8 p-4 sm:p-8 animate-fade-in">
+      <ProductGallery images={product.images} name={product.name} ratio="wide" fit="contain" />
 
         <div className="flex flex-col gap-4">
           <div>
@@ -103,6 +103,5 @@ export default function ProductQuickView({ product, open, onClose }) {
           </div>
         </div>
       </div>
-    </Modal>
   );
 }

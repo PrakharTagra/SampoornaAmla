@@ -13,7 +13,9 @@ import PaymentSelector from "../components/checkout/PaymentSelector";
 import ReviewStep from "../components/checkout/ReviewStep";
 import OrderSummary from "../components/checkout/OrderSummary";
 import OrderConfirmation from "../components/checkout/OrderConfirmation";
-import { useCart } from "../context/CartContext";
+import PageTransition from "../animations/PageTransition";
+import FadeIn from "../animations/FadeIn";
+import { useCart } from "../hooks/useCart";
 import {
   validateContact,
   validateAddress,
@@ -106,21 +108,23 @@ export default function Checkout() {
   }
 
   return (
-    <>
+    <PageTransition>
       <Container className="pt-6 sm:pt-8">
         <Breadcrumb items={[{ label: "Home", to: "/" }, { label: "Cart", to: "/cart" }, { label: "Checkout" }]} />
       </Container>
 
       <section className="py-8 sm:py-12">
         <Container className="flex flex-col gap-8">
-          <SectionHeading title="Checkout" />
+          <FadeIn direction="up">
+            <SectionHeading title="Checkout" description="Complete your delivery address and payment details below." />
+          </FadeIn>
 
           <StepIndicator current={step} onStepClick={goToStep} />
 
           <div className="grid lg:grid-cols-3 gap-10 items-start">
             <div className="lg:col-span-2 flex flex-col gap-6">
               {step === 1 ? (
-                <div className="flex flex-col gap-8">
+                <div key="step-1" className="flex flex-col gap-8 animate-fade-in">
                   <div className="flex flex-col gap-4">
                     <h3 className="font-serif text-xl text-brown">Contact information</h3>
                     <ContactFields value={contact} errors={errors} onChange={setContact} />
@@ -145,7 +149,7 @@ export default function Checkout() {
               ) : null}
 
               {step === 2 ? (
-                <div className="flex flex-col gap-8">
+                <div key="step-2" className="flex flex-col gap-8 animate-fade-in">
                   <div className="flex flex-col gap-4">
                     <h3 className="font-serif text-xl text-brown">Payment method</h3>
                     <PaymentSelector value={payment} errors={errors} onChange={setPayment} />
@@ -163,7 +167,7 @@ export default function Checkout() {
               ) : null}
 
               {step === 3 ? (
-                <div className="flex flex-col gap-8">
+                <div key="step-3" className="flex flex-col gap-8 animate-fade-in">
                   <div className="flex flex-col gap-4">
                     <h3 className="font-serif text-xl text-brown">Review your order</h3>
                     <ReviewStep
@@ -187,12 +191,12 @@ export default function Checkout() {
               ) : null}
             </div>
 
-            <div className="lg:sticky lg:top-24 bg-ivory-200/60 rounded-md p-6">
+            <div className="lg:sticky lg:top-24 bg-ivory-200/60 rounded-md p-6 shadow-sm border border-brown/10">
               <OrderSummary items={items} subtotal={subtotal} shipping={shipping} total={total} />
             </div>
           </div>
         </Container>
       </section>
-    </>
+    </PageTransition>
   );
 }

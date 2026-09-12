@@ -1,4 +1,4 @@
-import { formatINR } from "../primitives/Price";
+import { formatINR } from "../../utils/formatters";
 
 export default function CartSummary({ subtotal, shipping, total, amountToFreeShipping, children }) {
   return (

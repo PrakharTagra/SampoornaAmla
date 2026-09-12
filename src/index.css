@@ -31,4 +31,72 @@
   .container-page {
     @apply w-full max-w-container mx-auto px-5 sm:px-8 lg:px-10;
   }
+
+  /* Hardware-accelerated smooth animations */
+  .fade-in-element {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .fade-in-element.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in-element.fade-left {
+    transform: translateX(-24px);
+  }
+  .fade-in-element.fade-left.is-revealed {
+    transform: translateX(0);
+  }
+
+  .fade-in-element.fade-right {
+    transform: translateX(24px);
+  }
+  .fade-in-element.fade-right.is-revealed {
+    transform: translateX(0);
+  }
+
+  .fade-in-element.fade-scale {
+    transform: scale(0.95);
+  }
+  .fade-in-element.fade-scale.is-revealed {
+    transform: scale(1);
+  }
 }
+
+/* Delays */
+.delay-75 { transition-delay: 75ms; }
+.delay-100 { transition-delay: 100ms; }
+.delay-150 { transition-delay: 150ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+@keyframes logo-pulse {
+  0%, 100% { transform: scale(0.88); opacity: 0.72; }
+  50% { transform: scale(1); opacity: 1; }
+}
+
+.animate-logo-pulse {
+  animation: logo-pulse 1.4s ease-in-out infinite;
+}
+
+/* Accessible reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .fade-in-element {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+

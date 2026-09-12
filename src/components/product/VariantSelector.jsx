@@ -1,4 +1,4 @@
-import { formatINR } from "../primitives/Price";
+import { formatINR } from "../../utils/formatters";
 
 export default function VariantSelector({ variants, selectedId, onSelect }) {
   return (

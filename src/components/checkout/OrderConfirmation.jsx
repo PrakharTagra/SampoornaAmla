@@ -1,34 +1,53 @@
 import { Link } from "react-router-dom";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Package, Sparkles } from "lucide-react";
 import Button from "../primitives/Button";
-import { formatINR } from "../primitives/Price";
+import { formatINR } from "../../utils/formatters";
 
 export default function OrderConfirmation({ orderId, email, total }) {
   return (
-    <div className="flex flex-col items-center gap-5 text-center py-16 max-w-lg mx-auto">
-      <CheckCircle2 className="text-forest" size={48} strokeWidth={1.5} />
+    <div className="flex flex-col items-center gap-6 text-center py-16 max-w-lg mx-auto animate-fade-in-scale">
+      <div className="relative">
+        <div className="absolute inset-0 rounded-full bg-forest/20 animate-ping opacity-50" />
+        <div className="relative p-3 rounded-full bg-forest text-ivory shadow-soft">
+          <CheckCircle2 size={44} strokeWidth={2} />
+        </div>
+      </div>
+
       <div className="flex flex-col gap-2">
-        <h2 className="font-serif text-3xl text-brown">Order placed</h2>
-        <p className="text-sm text-brown/65 leading-relaxed">
-          Thank you — your order has been placed. A confirmation has been sent to{" "}
-          <span className="text-brown">{email}</span>.
+        <span className="inline-flex items-center justify-center gap-1 text-xs font-semibold uppercase tracking-wider text-amla-200">
+          <Sparkles size={13} /> Order Successful
+        </span>
+        <h2 className="font-serif text-3xl sm:text-4xl font-bold text-brown">
+          Thank you for your order!
+        </h2>
+        <p className="text-sm text-brown/70 leading-relaxed max-w-sm mx-auto">
+          We have received your order and are preparing your fresh Pratapgarh Amla package.
+          A confirmation has been sent to <strong className="text-brown">{email}</strong>.
         </p>
       </div>
 
-      <div className="flex flex-col gap-1.5 rounded-sm bg-ivory-200/60 px-6 py-4">
-        <span className="text-xs tracking-[0.1em] text-brown/50 uppercase">Order number</span>
-        <span className="font-serif text-xl text-brown">{orderId}</span>
-        <span className="text-xs text-brown/50 mt-1">Order total: {formatINR(total)}</span>
+      <div className="flex flex-col gap-2 rounded-lg bg-ivory-100 border border-brown/10 px-8 py-5 w-full shadow-sm">
+        <div className="flex items-center justify-between border-b border-brown/10 pb-3">
+          <span className="text-xs tracking-wider uppercase text-brown/50 font-medium">Order Reference</span>
+          <span className="font-mono font-bold text-base text-forest">{orderId}</span>
+        </div>
+        <div className="flex items-center justify-between pt-1">
+          <span className="text-xs text-brown/60">Total Paid</span>
+          <span className="font-serif text-lg font-bold text-brown">{formatINR(total)}</span>
+        </div>
       </div>
 
-      <p className="text-xs text-brown/50">Estimated delivery in 4–6 business days.</p>
+      <div className="flex items-center gap-2 text-xs text-brown/60 bg-ivory-50 px-4 py-2 rounded-full border border-brown/10">
+        <Package size={14} className="text-forest" />
+        <span>Estimated dispatch in 24 hours · Delivery in 3–5 business days</span>
+      </div>
 
-      <div className="flex flex-col xs:flex-row gap-3 mt-2">
+      <div className="flex flex-col xs:flex-row gap-3 mt-2 w-full justify-center">
         <Button as={Link} to="/products" variant="primary" size="md">
-          Continue Shopping
+          Explore More Products
         </Button>
-        <Button as={Link} to="/" variant="ghost" size="md">
-          Back to Home
+        <Button as={Link} to="/" variant="secondary" size="md">
+          Return to Homepage
         </Button>
       </div>
     </div>

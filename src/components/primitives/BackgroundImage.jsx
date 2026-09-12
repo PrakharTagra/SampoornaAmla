@@ -9,7 +9,7 @@ const OVERLAYS = {
   "bottom-fade": "bg-gradient-to-t from-brown/70 via-brown/10 to-transparent",
   forest: "bg-forest/70",
 };
-export default function BackgroundImage({ src, alt = "", overlay = "dark", className = "" }) {
+export default function BackgroundImage({ src, alt = "", overlay = "dark", className = "", imageClassName = "object-cover" }) {
   const [errored, setErrored] = useState(false);
   const overlayClass = OVERLAYS[overlay] ?? OVERLAYS.dark;
 
@@ -20,7 +20,7 @@ export default function BackgroundImage({ src, alt = "", overlay = "dark", class
           src={src}
           alt={alt}
           onError={() => setErrored(true)}
-          className="h-full w-full object-cover"
+          className={`h-full w-full ${imageClassName}`}
           loading="lazy"
           decoding="async"
         />

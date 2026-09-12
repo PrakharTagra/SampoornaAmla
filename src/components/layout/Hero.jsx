@@ -10,29 +10,26 @@ const ATTRIBUTES = [
   { icon: Truck, label: "Pan-India Delivery" },
 ];
 
-// Drop each banner background into /public/images/hero/ using these
-// filenames and it will show up automatically. Until then a themed
-// fallback gradient is shown so the banner never looks broken.
 const SLIDES = [
   {
     id: 1,
-    eyebrow: "From the land of Pratapgarh",
-    title: "Comes nature\u2019s gift",
-    description: "Pure Amla from the city of Aonla, brought to every home in India.",
-    image: "/images/hero/1.png",
-    imageAlt: "Pratapgarh Amla — fresh Amla fruit orchards",
+    eyebrow: "Royal Pratapgarh Heritage",
+    title: "Direct from the orchards of Aonla",
+    description: "Pure, nutrient-dense Indian Gooseberry handpicked from the historic city of Aonla, delivered fresh pan-India.",
+    image: "/images/hero/banner-royal.png",
+    imageAlt: "Pratapgarh Amla — Royal Orchard Heritage",
   },
   {
     id: 2,
-    eyebrow: "Pratapgarh ke amla",
-    title: "Comes nature\u2019s gift",
-    description: "Pure Amla from the city of Aonla, brought to every home in India.",
-    image: "/images/hero/2.png",
-    imageAlt: "Pratapgarh Amla — harvest",
+    eyebrow: "Ayurvedic Purity & Immunity",
+    title: "Nature's greatest source of Vitamin C",
+    description: "Preserved through gentle, time-tested methods without synthetic additives, artificial colors, or chemical fillers.",
+    image: "/images/hero/banner-ayurvedic.png",
+    imageAlt: "Pratapgarh Amla — Ayurvedic Superfood",
   },
 ];
 
-const SLIDE_DURATION = 5000;
+const SLIDE_DURATION = 6000;
 
 export default function Hero() {
   const [active, setActive] = useState(0);
@@ -41,11 +38,13 @@ export default function Hero() {
     document.getElementById("collection")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const nextSlide = () => {
+    setActive((curr) => (curr + 1) % SLIDES.length);
+  };
+
   useEffect(() => {
     if (SLIDES.length <= 1) return undefined;
-    const intervalId = setInterval(() => {
-      setActive((current) => (current + 1) % SLIDES.length);
-    }, SLIDE_DURATION);
+    const intervalId = setInterval(nextSlide, SLIDE_DURATION);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -53,57 +52,58 @@ export default function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden flex-1 flex items-center min-h-[26rem] sm:min-h-[30rem]"
+      className="relative flex h-[28rem] overflow-hidden sm:h-[32rem] lg:h-[36rem]"
       aria-roledescription="carousel"
       aria-label="Homepage banner"
     >
-      <BackgroundImage key={slide.id} src={slide.image} alt={slide.imageAlt} overlay="left-fade" />
+      <div
+        className="absolute inset-0 flex h-full w-full transition-transform duration-1000 ease-in-out"
+        style={{ transform: `translateX(-${active * 100}%)` }}
+      >
+        {SLIDES.map((s) => (
+          <div key={s.id} className="relative h-full w-full shrink-0">
+            <BackgroundImage src={s.image} alt={s.imageAlt} overlay="left-fade" />
+          </div>
+        ))}
+      </div>
 
-      <Container className="relative z-10 py-10 sm:py-16 lg:py-20 w-full">
+      <Container className="relative z-10 w-full py-6 sm:py-10 lg:py-12">
         <div
           key={slide.id}
-          className="flex flex-col gap-3 sm:gap-5 lg:gap-6 max-w-lg animate-[fade-in_0.5s_ease]"
+          className="flex flex-col gap-4 sm:gap-6 max-w-xl"
         >
-          <span className="font-sans text-xs tracking-[0.14em] text-gold-50">
+          <span className="font-sans text-xs sm:text-sm font-semibold tracking-[0.16em] uppercase text-gold-50 animate-fade-in-down">
             {slide.eyebrow}
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-[3.4rem] leading-[1.08] text-ivory">
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-[3.6rem] leading-[1.08] text-ivory drop-shadow-sm animate-fade-in-up">
             {slide.title}
           </h1>
-          <p className="font-sans text-sm sm:text-base lg:text-lg text-ivory/80 max-w-md leading-relaxed">
+          <p className="font-sans text-sm sm:text-base lg:text-lg text-ivory/85 max-w-md leading-relaxed animate-fade-in-up delay-100">
             {slide.description}
           </p>
 
-          <div className="flex flex-col xs:flex-row flex-wrap gap-x-6 gap-y-2 pt-1">
+          <div className="flex flex-col xs:flex-row flex-wrap gap-x-6 gap-y-2.5 pt-2 animate-fade-in delay-200">
             {ATTRIBUTES.map((attr) => (
-              <div key={attr.label} className="flex items-center gap-2 text-sm text-ivory/85">
-                <attr.icon size={16} className="text-gold-50" strokeWidth={1.75} />
+              <div key={attr.label} className="flex items-center gap-2 text-sm text-ivory/90 font-medium">
+                <div className="p-1 rounded-full bg-gold/20 text-gold-50">
+                  <attr.icon size={15} strokeWidth={2} />
+                </div>
                 {attr.label}
               </div>
             ))}
           </div>
 
-          <Button size="lg" className="w-fit mt-1 sm:mt-2" onClick={scrollToCollection}>
-            Shop Amla
-          </Button>
+          <div className="pt-2 animate-fade-in delay-300">
+            <Button
+              size="lg"
+              className="w-fit shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              onClick={scrollToCollection}
+            >
+              Shop Amla Collection
+            </Button>
+          </div>
         </div>
 
-        {SLIDES.length > 1 ? (
-          <div className="flex items-center gap-2 mt-10 lg:mt-16">
-            {SLIDES.map((s, i) => (
-              <button
-                key={s.id}
-                type="button"
-                aria-label={`Show banner ${i + 1}`}
-                aria-current={i === active}
-                onClick={() => setActive(i)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === active ? "w-8 bg-gold-50" : "w-4 bg-ivory/40 hover:bg-ivory/60"
-                }`}
-              />
-            ))}
-          </div>
-        ) : null}
       </Container>
     </section>
   );

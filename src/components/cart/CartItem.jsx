@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ProductImage from "../primitives/ProductImage";
 import Price from "../primitives/Price";
 import QuantitySelector from "../primitives/QuantitySelector";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../hooks/useCart";
 import { products } from "../../data/products";
 
 function getVariantStock(productId, variantId) {

@@ -7,8 +7,14 @@ export const products = [
     description:
       "Whole Amla fruit, handpicked from the orchards of Pratapgarh and packed without added preservatives. A daily staple for those who prefer their Amla in its most natural form.",
     category: "fruit",
-    images: [null, null, null],
-    thumbnail: null,
+    thumbnail: "/images/products/pure-amla/main.png",
+    images: [
+      "/images/products/pure-amla/main.png",
+      "/images/products/pure-amla/bottle-front.png",
+      "/images/products/pure-amla/open-jar.png",
+      "/images/products/pure-amla/bottle-back.png",
+      "/images/products/pure-amla/slide.png",
+    ],
     rating: 4.8,
     reviewCount: 46,
     origin: "Pratapgarh, Uttar Pradesh",
@@ -18,9 +24,9 @@ export const products = [
       { id: "pure-amla-1kg", name: "1 kg", weight: "1 kg", price: 599, compareAtPrice: 699, sku: "PA-FRT-1000", stock: 15 },
     ],
     benefits: [
-      "Rich in Vitamin C",
-      "Supports everyday immunity",
-      "No added preservatives",
+      "Rich in natural Vitamin C & bioflavonoids",
+      "Strengthens everyday immunity & digestion",
+      "No chemical preservatives or artificial ripening",
     ],
     howToUse: "Eat fresh, or add to chutneys, pickles and everyday cooking.",
     ingredients: "100% Amla (Indian Gooseberry).",
@@ -35,8 +41,13 @@ export const products = [
     description:
       "Sun-dried Amla, stone-ground into a fine powder. Easy to store and simple to add to your daily routine.",
     category: "powder",
-    images: [null, null, null],
-    thumbnail: null,
+    thumbnail: "/images/products/amla-powder/main.png",
+    images: [
+      "/images/products/amla-powder/main.png",
+      "/images/products/amla-powder/jar.png",
+      "/images/products/amla-powder/bottle-front.png",
+      "/images/products/amla-powder/bottle-back.png",
+    ],
     rating: 4.6,
     reviewCount: 31,
     origin: "Pratapgarh, Uttar Pradesh",
@@ -47,10 +58,10 @@ export const products = [
     ],
     benefits: [
       "Rich in Vitamin C and antioxidants",
-      "Easy to store and use",
-      "No artificial additives",
+      "Easy to store and mix into drinks",
+      "Stone-ground with zero artificial additives",
     ],
-    howToUse: "Mix a spoonful into water, juice or your regular wellness routine.",
+    howToUse: "Mix a spoonful into warm water, juice, honey, or your daily wellness routine.",
     ingredients: "100% Amla (Indian Gooseberry), sun-dried and ground.",
     storage: "Store in an airtight container, away from moisture and direct sunlight.",
     relatedProducts: ["pure-amla", "dried-amla"],
@@ -63,8 +74,14 @@ export const products = [
     description:
       "Naturally dried Amla pieces with no added sugar, made for snacking anytime, anywhere.",
     category: "dried",
-    images: [null, null, null],
-    thumbnail: null,
+    thumbnail: "/images/products/dried-amla/main.png",
+    images: [
+      "/images/products/dried-amla/main.png",
+      "/images/products/dried-amla/bottle-front.png",
+      "/images/products/dried-amla/open-jar.png",
+      "/images/products/dried-amla/bottle-back.png",
+      "/images/products/dried-amla/bucket.png",
+    ],
     rating: 4.5,
     reviewCount: 22,
     origin: "Pratapgarh, Uttar Pradesh",
@@ -74,11 +91,11 @@ export const products = [
       { id: "dried-amla-1kg", name: "1 kg", weight: "1 kg", price: 699, compareAtPrice: 749, sku: "PA-DRD-1000", stock: 10 },
     ],
     benefits: [
-      "Naturally dried, no added sugar",
-      "Convenient anytime snacking",
-      "Retains natural Amla goodness",
+      "Naturally dried, no added sugar or sulfur",
+      "Convenient anytime healthy snacking",
+      "Retains natural Amla sour & tangy goodness",
     ],
-    howToUse: "Enjoy as a snack, or soak briefly before use in recipes.",
+    howToUse: "Enjoy straight as a digestive snack, or soak briefly before use in culinary recipes.",
     ingredients: "100% Amla (Indian Gooseberry), naturally dried.",
     storage: "Store in a cool, dry place in an airtight container.",
     relatedProducts: ["pure-amla", "amla-powder"],
@@ -87,8 +104,8 @@ export const products = [
 
 export const CATEGORY_LABELS = {
   fruit: "Whole Fruit",
-  powder: "Powder",
-  dried: "Dried",
+  powder: "Stone-Ground Powder",
+  dried: "Naturally Dried",
 };
 
 export function getProductBySlug(slug) {

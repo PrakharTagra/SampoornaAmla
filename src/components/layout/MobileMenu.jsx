@@ -8,9 +8,12 @@ export default function MobileMenu({ open, onClose, links }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 lg:hidden">
-      <button aria-label="Close menu" className="absolute inset-0 bg-brown/60" onClick={onClose} />
-      <div className="relative ml-auto h-full w-72 max-w-[80vw] bg-ivory shadow-soft flex flex-col p-6">
+    <div className="fixed inset-0 z-[60] lg:hidden">
+      <button aria-label="Close menu" className="absolute inset-0 z-0 bg-brown/60" onClick={onClose} />
+      <div
+        className="absolute right-0 top-0 z-10 flex h-full w-[88vw] max-w-[21rem] flex-col overflow-y-auto px-5 py-6 shadow-soft animate-slide-in-right"
+        style={{ backgroundColor: "#F7F1E3" }}
+      >
         <button
           aria-label="Close menu"
           onClick={onClose}
@@ -18,7 +21,7 @@ export default function MobileMenu({ open, onClose, links }) {
         >
           <X size={18} />
         </button>
-        <nav className="flex flex-col gap-1 mt-6">
+        <nav className="mt-8 flex flex-col gap-1 border-t border-brown/10 pt-3">
           {links.map((link) =>
             link.scrollTarget ? (
               <Link
@@ -31,7 +34,7 @@ export default function MobileMenu({ open, onClose, links }) {
                   }
                   onClose();
                 }}
-                className="py-3 border-b border-brown/10 text-base text-brown/80"
+                className="flex min-h-12 items-center border-b border-brown/10 px-2 text-base font-medium text-brown/80 transition-colors hover:bg-ivory-100 hover:text-forest"
               >
                 {link.label}
               </Link>
@@ -42,8 +45,8 @@ export default function MobileMenu({ open, onClose, links }) {
                 end={link.end}
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `py-3 border-b border-brown/10 text-base ${
-                    isActive ? "text-forest font-medium" : "text-brown/80"
+                  `flex min-h-12 items-center border-b border-brown/10 px-2 text-base transition-colors hover:bg-ivory-100 hover:text-forest ${
+                    isActive ? "font-medium text-forest" : "text-brown/80"
                   }`
                 }
               >

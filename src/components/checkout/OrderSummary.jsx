@@ -1,6 +1,6 @@
 import ProductImage from "../primitives/ProductImage";
 import Divider from "../primitives/Divider";
-import { formatINR } from "../primitives/Price";
+import { formatINR } from "../../utils/formatters";
 
 export default function OrderSummary({ items, subtotal, shipping, total }) {
   return (
