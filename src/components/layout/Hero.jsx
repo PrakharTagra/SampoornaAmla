@@ -34,7 +34,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex h-[28rem] overflow-hidden sm:h-[32rem] lg:h-[36rem]"
+      className="relative flex h-[calc(100dvh-11rem)] min-h-[24rem] overflow-hidden sm:h-[calc(100dvh-10.5rem)] sm:min-h-[26rem] md:h-[calc(100dvh-9.5rem)] lg:min-h-[30rem]"
       aria-roledescription="carousel"
       aria-label="Homepage banner"
     >
@@ -49,10 +49,10 @@ export default function Hero() {
         ))}
       </div>
 
-      <Container className="relative z-10 w-full py-6 sm:py-10 lg:py-12">
+      <Container className="relative z-10 w-full py-4 sm:py-8 lg:py-10">
         <div
           key={slide.id}
-          className="flex flex-col gap-4 sm:gap-6 max-w-xl"
+          className="flex max-w-xl flex-col gap-3 sm:gap-5"
         >
           <span className="font-sans text-xs sm:text-sm font-semibold tracking-[0.16em] uppercase text-gold-50 animate-fade-in-down">
             {slide.eyebrow}

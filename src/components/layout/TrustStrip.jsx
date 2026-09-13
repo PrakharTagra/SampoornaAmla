@@ -13,15 +13,20 @@ export default function TrustStrip() {
   }));
 
   return (
-    <section className="border-y border-brown/10 bg-ivory-50/80 backdrop-blur-sm">
-      <Container className="py-4">
+    <section className="h-[7rem] border-y border-brown/10 bg-ivory-50/80 backdrop-blur-sm sm:h-[5.5rem] md:h-[4.5rem]">
+      <Container className="h-full py-2 sm:py-3">
         <StaggerContainer
           staggerDelay={100}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center"
+          className="grid h-full grid-cols-2 items-center gap-2 sm:gap-4 md:grid-cols-4 md:gap-6"
         >
           {items.map((item) => (
-            <div key={item.label} className="flex justify-start sm:justify-center">
-              <TrustItem icon={item.icon} label={item.label} />
+            <div key={item.label} className="flex h-full min-w-0 items-center justify-center">
+              <TrustItem
+                icon={item.icon}
+                label={item.label}
+                className="w-full justify-center"
+                labelClassName="text-center text-xs sm:text-sm"
+              />
             </div>
           ))}
         </StaggerContainer>
