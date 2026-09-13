@@ -67,7 +67,9 @@ export default function Modal({ open, onClose, children, labelledBy, variant = "
 
   return (
     <div
-      className={`fixed inset-0 z-50 ${isDrawer ? "flex justify-end" : "flex items-center justify-center p-4"}`}
+      className={`fixed inset-0 z-50 ${
+        isDrawer ? "flex justify-end" : "flex items-end justify-center sm:items-center sm:p-4"
+      }`}
     >
       <button
         aria-label="Close dialog"
@@ -86,11 +88,22 @@ export default function Modal({ open, onClose, children, labelledBy, variant = "
             ? `relative bg-ivory w-full max-w-md h-full overflow-y-auto shadow-soft transition-transform duration-300 ease-out motion-reduce:transition-none ${
                 visible ? "translate-x-0" : "translate-x-full"
               }`
-            : `relative bg-ivory w-full max-w-2xl max-h-[calc(100dvh-1rem)] overflow-y-auto rounded-md shadow-soft transition-all duration-200 motion-reduce:transition-none ${
-                visible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            : // Center variant: a full-width bottom sheet on mobile (rounded top,
+              // slides up from the bottom) so it never has to squeeze inside
+              // a small floating card on a narrow screen; unchanged centered
+              // dialog from sm/ up.
+              `relative bg-ivory w-full sm:max-w-2xl max-h-[88dvh] sm:max-h-[calc(100dvh-1rem)] overflow-y-auto rounded-t-2xl sm:rounded-md shadow-soft transition-transform duration-300 ease-out sm:transition-all sm:duration-200 motion-reduce:transition-none ${
+                visible
+                  ? "translate-y-0 sm:scale-100 sm:opacity-100"
+                  : "translate-y-full sm:translate-y-0 sm:scale-95 sm:opacity-0"
               }`
         }
       >
+        {!isDrawer ? (
+          <div className="sticky top-0 z-10 flex justify-center bg-ivory pt-2.5 pb-1 sm:hidden" aria-hidden="true">
+            <span className="h-1 w-10 rounded-full bg-brown/20" />
+          </div>
+        ) : null}
         <button
           ref={closeButtonRef}
           aria-label="Close"

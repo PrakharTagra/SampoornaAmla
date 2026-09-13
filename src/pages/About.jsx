@@ -12,7 +12,7 @@ import { aboutPageData } from "../data/sitedata";
 const ICON_MAP = { MapPin, Leaf, ShieldCheck, Users };
 
 export default function About() {
-  const { stats, pillars } = aboutPageData;
+  const { hero, stats, pillars } = aboutPageData;
   const mappedPillars = pillars.map((pillar) => ({
     ...pillar,
     icon: ICON_MAP[pillar.iconName] || Leaf,
@@ -24,15 +24,16 @@ export default function About() {
         <Breadcrumb items={[{ label: "Home", to: "/" }, { label: "About Us" }]} />
       </Container>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden my-6 bg-ivory-100 rounded-2xl mx-4 sm:mx-8 lg:mx-auto max-w-container">
+      {/* Hero Section — full-bleed edge-to-edge on mobile, back to the
+          inset rounded card from sm/ up (unchanged from before). */}
+      <section className="relative overflow-hidden my-6 bg-ivory-100 sm:rounded-2xl sm:mx-8 lg:mx-auto sm:max-w-container">
         <BackgroundImage
-          src="/images/hero/banner-3.png"
-          alt="Amla Sampurna products and natural Amla benefits"
+          src={hero.bannerImage}
+          alt={hero.bannerAlt}
           overlay="none"
           imageClassName="object-cover"
         />
-        <div className="relative aspect-[21/8] min-h-[14rem] sm:min-h-[20rem]" aria-hidden="true" />
+        <div className="relative aspect-[16/9] min-h-[12rem] sm:aspect-[21/8] sm:min-h-[20rem]" aria-hidden="true" />
       </section>
 
       {/* Stats Counter Section */}

@@ -8,17 +8,15 @@ export const siteMetadata = {
 };
 
 export const siteImages = {
-  logo: "/ChatGPT%20Image%20Sep%2012,%202026,%2012_01_40%20PM.png",
-  logoFallback: "/images/logo.png",
+  logo: "/images/logo.png",
+  logoFallback: "/images/logo-fallback.png",
   hero: {
     bannerRoyal: "/images/hero/banner-royal.png",
     bannerAyurvedic: "/images/hero/banner-ayurvedic.png",
-    bannerHarvest: "/images/hero/banner-3.png",
+    bannerHarvest: "/images/hero/banner-harvest.png",
   },
   story: {
-    heroBanner: "/Amla%20Ecom%20store%20images/Amla%20Ecom%20store%20images/Other/Our%20Story%20New.png",
-    origin: "/images/story/our-story.png",
-    productOrigin: "/images/story/product-origin.jpg",
+    heroBanner: "/images/story/story-hero.png",
   },
 };
 

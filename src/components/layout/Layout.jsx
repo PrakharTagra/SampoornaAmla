@@ -3,7 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import ScrollToTop from "./ScrollToTop";
 import CartDrawer from "../cart/CartDrawer";
-import Toast from "../ui/Toast";
+import Toast from "../primitives/Toast";
 
 export default function Layout() {
   return (

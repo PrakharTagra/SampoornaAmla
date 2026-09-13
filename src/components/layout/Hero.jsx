@@ -52,15 +52,15 @@ export default function Hero() {
       <Container className="relative z-10 w-full py-4 sm:py-8 lg:py-10">
         <div
           key={slide.id}
-          className="flex max-w-xl flex-col gap-3 sm:gap-5"
+          className="flex max-w-[85%] flex-col gap-2.5 rounded-xl bg-brown/40 p-4 backdrop-blur-[2px] xs:max-w-xl sm:max-w-xl sm:gap-5 sm:rounded-none sm:bg-transparent sm:p-0 sm:backdrop-blur-none"
         >
           <span className="font-sans text-xs sm:text-sm font-semibold tracking-[0.16em] uppercase text-gold-50 animate-fade-in-down">
             {slide.eyebrow}
           </span>
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-[3.6rem] leading-[1.08] text-ivory drop-shadow-sm animate-fade-in-up">
+          <h1 className="font-serif text-2xl xs:text-3xl sm:text-5xl lg:text-[3.6rem] leading-[1.1] sm:leading-[1.08] text-ivory drop-shadow-sm animate-fade-in-up">
             {slide.title}
           </h1>
-          <p className="font-sans text-sm sm:text-base lg:text-lg text-ivory/85 max-w-md leading-relaxed animate-fade-in-up delay-100">
+          <p className="font-sans text-sm sm:text-base lg:text-lg text-ivory/90 sm:text-ivory/85 max-w-md leading-relaxed animate-fade-in-up delay-100">
             {slide.description}
           </p>
 

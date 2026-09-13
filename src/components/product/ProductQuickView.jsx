@@ -48,12 +48,13 @@ function ProductQuickViewContent({ product, onClose }) {
   };
 
   return (
+    <>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8 p-4 sm:p-8 animate-fade-in">
       <ProductGallery images={product.images} name={product.name} ratio="wide" fit="contain" />
 
         <div className="flex flex-col gap-4">
           <div>
-            <h2 id="quick-view-title" className="font-serif text-2xl text-brown">
+            <h2 id="quick-view-title" className="font-serif text-xl sm:text-2xl text-brown pr-8 sm:pr-0">
               {product.name}
             </h2>
             <p className="text-xs text-amla-200 mt-1">100% Natural &amp; Fresh</p>
@@ -80,9 +81,10 @@ function ProductQuickViewContent({ product, onClose }) {
             <QuantitySelector value={quantity} onChange={setQuantity} />
           </div>
 
-          <Price amount={totalPrice} size="lg" />
+          <Price amount={totalPrice} size="lg" className="sm:block hidden" />
 
-          <div className="flex flex-col xs:flex-row gap-3">
+          {/* Desktop actions — inline, as before */}
+          <div className="hidden sm:flex flex-col xs:flex-row gap-3">
             <Button variant="primary" size="md" className="flex-1" onClick={handleAddToCart}>
               Add to Cart
             </Button>
@@ -103,5 +105,20 @@ function ProductQuickViewContent({ product, onClose }) {
           </div>
         </div>
       </div>
+
+    {/* Mobile actions — pinned to the bottom of the sheet (sticky, not
+        fixed, so it stays contained within the modal's own scroll area
+        rather than floating over the rest of the viewport) so Add to Cart /
+        Buy Now are always reachable without hunting through the scroll. */}
+    <div className="sm:hidden sticky bottom-0 z-10 flex items-center gap-3 border-t border-brown/10 bg-ivory/95 backdrop-blur-sm px-4 py-3 shadow-[0_-4px_16px_rgba(51,44,36,0.08)]">
+      <Price amount={totalPrice} size="md" className="shrink-0" />
+      <Button variant="secondary" size="sm" className="flex-1" onClick={handleBuyNow}>
+        Buy Now
+      </Button>
+      <Button variant="primary" size="sm" className="flex-1" onClick={handleAddToCart}>
+        Add to Cart
+      </Button>
+    </div>
+    </>
   );
 }
