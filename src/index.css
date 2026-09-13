@@ -32,6 +32,17 @@
     @apply w-full max-w-container mx-auto px-5 sm:px-8 lg:px-10;
   }
 
+  /* Keeps a container scrollable (so overflowing content is never cut off)
+     while hiding the visible scrollbar chrome — used by the quick view
+     dialog so it never shows a scroller even when it does need to scroll. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Hardware-accelerated smooth animations */
   .fade-in-element {
     opacity: 0;

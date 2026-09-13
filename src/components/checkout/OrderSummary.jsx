@@ -5,7 +5,7 @@ import { formatINR } from "../../utils/formatters";
 export default function OrderSummary({ items, subtotal, shipping, total }) {
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex flex-col gap-4 max-h-72 overflow-y-auto pr-1">
+      <div className="flex flex-col gap-4 max-h-72 overflow-y-auto pt-3 pr-1">
         {items.map((item) => (
           <div key={`${item.productId}-${item.variantId}`} className="flex gap-3">
             <div className="relative shrink-0 w-14">

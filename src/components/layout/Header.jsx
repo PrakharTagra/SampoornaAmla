@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Search, ShoppingBag, Menu, X } from "lucide-react";
 import Container from "../primitives/Container";
@@ -19,6 +19,31 @@ export default function Header() {
   const { itemCount, openDrawer } = useCart();
   const { isScrolled } = useScrollPosition(10);
   const location = useLocation();
+  const headerRef = useRef(null);
+
+  // Expose the header's real, rendered height as a CSS variable so any
+  // fixed/full-screen UI (quick view, modals, etc.) can reserve exactly
+  // enough space for it instead of guessing a fixed rem value that drifts
+  // out of sync across screen sizes.
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return undefined;
+
+    const setHeaderHeightVar = () => {
+      document.documentElement.style.setProperty("--header-h", `${el.offsetHeight}px`);
+    };
+
+    setHeaderHeightVar();
+
+    if (typeof ResizeObserver !== "undefined") {
+      const observer = new ResizeObserver(setHeaderHeightVar);
+      observer.observe(el);
+      return () => observer.disconnect();
+    }
+
+    window.addEventListener("resize", setHeaderHeightVar);
+    return () => window.removeEventListener("resize", setHeaderHeightVar);
+  }, []);
 
   const navLinkClass = ({ isActive }) =>
     `relative text-sm font-medium transition-all duration-200 py-1 ${
@@ -34,7 +59,9 @@ export default function Header() {
   );
 
   return (
+    <>
     <header
+      ref={headerRef}
       className={`sticky top-0 z-40 transition-all duration-300 ${
         isScrolled
           ? "bg-ivory/95 backdrop-blur-md shadow-card border-b border-brown/10"
@@ -136,8 +163,16 @@ export default function Header() {
           </Container>
         </div>
       ) : null}
-
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} links={NAV_LINKS} />
     </header>
+
+      {/* Rendered as a sibling of <header>, not inside it: the header has
+          backdrop-blur, and an element with backdrop-filter becomes the
+          containing block for any position:fixed descendant in modern
+          browsers. Nesting the menu inside the header was collapsing its
+          "fixed inset-0" down to the header's own ~64–80px box, which is
+          why it looked empty/transparent — it was rendering, just squeezed
+          into a sliver at the very top. */}
+      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} links={NAV_LINKS} />
+    </>
   );
 }

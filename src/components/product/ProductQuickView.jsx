@@ -68,7 +68,7 @@ function ProductQuickViewContent({ product, onClose }) {
             <span className="text-brown/50">({product.reviewCount} Reviews)</span>
           </div>
 
-          <p className="text-sm text-brown/70 leading-relaxed">{product.description}</p>
+          <p className="text-sm text-brown/70 leading-relaxed line-clamp-3 sm:line-clamp-none">{product.description}</p>
 
           <VariantSelector
             variants={product.variants}
@@ -110,7 +110,7 @@ function ProductQuickViewContent({ product, onClose }) {
         fixed, so it stays contained within the modal's own scroll area
         rather than floating over the rest of the viewport) so Add to Cart /
         Buy Now are always reachable without hunting through the scroll. */}
-    <div className="sm:hidden sticky bottom-0 z-10 flex items-center gap-3 border-t border-brown/10 bg-ivory/95 backdrop-blur-sm px-4 py-3 shadow-[0_-4px_16px_rgba(51,44,36,0.08)]">
+    <div className="sm:hidden sticky bottom-0 z-10 flex items-center gap-3 border-t border-brown/10 bg-ivory/95 backdrop-blur-sm px-4 pt-3 shadow-[0_-4px_16px_rgba(51,44,36,0.08)] pb-[max(0.75rem,env(safe-area-inset-bottom))]">
       <Price amount={totalPrice} size="md" className="shrink-0" />
       <Button variant="secondary" size="sm" className="flex-1" onClick={handleBuyNow}>
         Buy Now

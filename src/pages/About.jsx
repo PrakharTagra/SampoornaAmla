@@ -3,7 +3,6 @@ import Container from "../components/primitives/Container";
 import SectionHeading from "../components/primitives/SectionHeading";
 import Breadcrumb from "../components/primitives/Breadcrumb";
 import Card from "../components/primitives/Card";
-import BackgroundImage from "../components/primitives/BackgroundImage";
 import FadeIn from "../animations/FadeIn";
 import StaggerContainer from "../animations/StaggerContainer";
 import PageTransition from "../animations/PageTransition";
@@ -24,16 +23,12 @@ export default function About() {
         <Breadcrumb items={[{ label: "Home", to: "/" }, { label: "About Us" }]} />
       </Container>
 
-      {/* Hero Section — full-bleed edge-to-edge on mobile, back to the
-          inset rounded card from sm/ up (unchanged from before). */}
+      {/* Hero Section — the banner photo is shown at its complete width,
+          uncropped (no BackgroundImage/object-cover here); the section's
+          height is simply whatever height the image renders at, at every
+          breakpoint. */}
       <section className="relative overflow-hidden my-6 bg-ivory-100 sm:rounded-2xl sm:mx-8 lg:mx-auto sm:max-w-container">
-        <BackgroundImage
-          src={hero.bannerImage}
-          alt={hero.bannerAlt}
-          overlay="none"
-          imageClassName="object-cover"
-        />
-        <div className="relative aspect-[16/9] min-h-[12rem] sm:aspect-[21/8] sm:min-h-[20rem]" aria-hidden="true" />
+        <img src={hero.bannerImage} alt={hero.bannerAlt} className="block w-full h-auto" loading="eager" decoding="async" />
       </section>
 
       {/* Stats Counter Section */}

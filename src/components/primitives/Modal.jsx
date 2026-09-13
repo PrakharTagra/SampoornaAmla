@@ -70,6 +70,10 @@ export default function Modal({ open, onClose, children, labelledBy, variant = "
       className={`fixed inset-0 z-50 ${
         isDrawer ? "flex justify-end" : "flex items-end justify-center sm:items-center sm:p-4"
       }`}
+      // Reserve real space for the navbar at the top so the dialog never
+      // renders flush against (or behind) it — only for the center variant;
+      // the cart drawer intentionally still runs edge-to-edge.
+      style={!isDrawer ? { paddingTop: "var(--header-h, 4rem)" } : undefined}
     >
       <button
         aria-label="Close dialog"
@@ -91,8 +95,14 @@ export default function Modal({ open, onClose, children, labelledBy, variant = "
             : // Center variant: a full-width bottom sheet on mobile (rounded top,
               // slides up from the bottom) so it never has to squeeze inside
               // a small floating card on a narrow screen; unchanged centered
-              // dialog from sm/ up.
-              `relative bg-ivory w-full sm:max-w-2xl max-h-[88dvh] sm:max-h-[calc(100dvh-1rem)] overflow-y-auto rounded-t-2xl sm:rounded-md shadow-soft transition-transform duration-300 ease-out sm:transition-all sm:duration-200 motion-reduce:transition-none ${
+              // dialog from sm/ up. max-h is reserved against the header's
+              // real measured height (--header-h, set by Header.jsx) rather
+              // than a guessed rem value, so the sheet reliably fits the
+              // viewport at every screen size without clipping. The scroll
+              // container keeps working (overscroll-contain) but its
+              // scrollbar is hidden (no-scrollbar) so it never shows as a
+              // visible scroller.
+              `relative bg-ivory w-full sm:max-w-2xl max-h-[calc(100dvh-var(--header-h,4rem)-1rem)] sm:max-h-[calc(100dvh-var(--header-h,5rem)-2rem)] overflow-y-auto overscroll-contain no-scrollbar rounded-t-2xl sm:rounded-md shadow-soft transition-transform duration-300 ease-out sm:transition-all sm:duration-200 motion-reduce:transition-none ${
                 visible
                   ? "translate-y-0 sm:scale-100 sm:opacity-100"
                   : "translate-y-full sm:translate-y-0 sm:scale-95 sm:opacity-0"
